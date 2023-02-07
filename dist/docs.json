@@ -20,11 +20,236 @@
         "docs": "",
         "complexTypes": [],
         "slug": "echo"
+      },
+      {
+        "name": "getSubscriptionId",
+        "signature": "() => void",
+        "parameters": [],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "getsubscriptionid"
+      },
+      {
+        "name": "subscribe",
+        "signature": "() => void",
+        "parameters": [],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "subscribe"
+      },
+      {
+        "name": "initcleverPush",
+        "signature": "(options: { channelId: string; autoRegister: boolean; }) => void",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ channelId: string; autoRegister: boolean; }"
+          }
+        ],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "initcleverpush"
+      },
+      {
+        "name": "unsubscribe",
+        "signature": "() => void",
+        "parameters": [],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "unsubscribe"
+      },
+      {
+        "name": "enableDevelopmentMode",
+        "signature": "() => void",
+        "parameters": [],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "enabledevelopmentmode"
+      },
+      {
+        "name": "showTopicsDialog",
+        "signature": "() => void",
+        "parameters": [],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "showtopicsdialog"
+      },
+      {
+        "name": "isSubscribed",
+        "signature": "() => boolean",
+        "parameters": [],
+        "returns": "boolean",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "issubscribed"
+      },
+      {
+        "name": "setAppBannerOpenedHandler",
+        "signature": "() => void",
+        "parameters": [],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "setappbanneropenedhandler"
+      },
+      {
+        "name": "setNotificationReceivedHandler",
+        "signature": "() => void",
+        "parameters": [],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "setnotificationreceivedhandler"
+      },
+      {
+        "name": "setNotificationOpenedHandler",
+        "signature": "() => void",
+        "parameters": [],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "setnotificationopenedhandler"
+      },
+      {
+        "name": "setSubscribedHandler",
+        "signature": "() => void",
+        "parameters": [],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "setsubscribedhandler"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'notificationReceivedListener', listenerFunc: (data: { success: boolean; data?: any; error?: any; }) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'notificationReceivedListener'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(data: { success: boolean; data?: any; error?: any; }) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle"
+        ],
+        "slug": "addlistenernotificationreceivedlistener"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'notificationOpenedListener', listenerFunc: (data: { success: boolean; data?: any; error?: any; }) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'notificationOpenedListener'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(data: { success: boolean; data?: any; error?: any; }) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle"
+        ],
+        "slug": "addlistenernotificationopenedlistener"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'appBannerOpenedListener', listenerFunc: (data: { success: boolean; data?: any; error?: any; }) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'appBannerOpenedListener'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(data: { success: boolean; data?: any; error?: any; }) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle"
+        ],
+        "slug": "addlistenerappbanneropenedlistener"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'subscribedListener', listenerFunc: (data: { success: boolean; data?: any; error?: any; }) => void) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'subscribedListener'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(data: { success: boolean; data?: any; error?: any; }) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle"
+        ],
+        "slug": "addlistenersubscribedlistener"
       }
     ],
     "properties": []
   },
-  "interfaces": [],
+  "interfaces": [
+    {
+      "name": "PluginListenerHandle",
+      "slug": "pluginlistenerhandle",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "remove",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "() => Promise<void>"
+        }
+      ]
+    }
+  ],
   "enums": [],
   "typeAliases": [],
   "pluginConfigs": []

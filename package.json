@@ -1,7 +1,7 @@
 {
-  "name": "capacitor-plugin-myplugin",
+  "name": "cleverpush-capacitor-sdk",
   "version": "0.0.1",
-  "description": "CleverPush Push Notification Services",
+  "description": "CleverPush Capacitor SDK",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -11,16 +11,16 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "CapacitorPluginMyplugin.podspec"
+    "CleverpushCapacitorSdk.podspec"
   ],
-  "author": "CleverPush",
+  "author": "gbhrdt",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://cleverpush.com/en.git"
+    "url": "git+https://github.com/cleverpush/cleverpush-capacitor-sdk.git"
   },
   "bugs": {
-    "url": "https://cleverpush.com/en/issues"
+    "url": "https://github.com/cleverpush/cleverpush-capacitor-sdk/issues"
   },
   "keywords": [
     "capacitor",

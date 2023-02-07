@@ -1,11 +1,11 @@
-# capacitor-plugin-myplugin
+# cleverpush-capacitor-sdk
 
-CleverPush Push Notification Services
+CleverPush Capacitor SDK
 
 ## Install
 
 ```bash
-npm install capacitor-plugin-myplugin
+npm install cleverpush-capacitor-sdk
 npx cap sync
 ```
 
@@ -14,24 +14,21 @@ npx cap sync
 <docgen-index>
 
 * [`echo(...)`](#echo)
+* [`getSubscriptionId()`](#getsubscriptionid)
+* [`subscribe()`](#subscribe)
+* [`initcleverPush(...)`](#initcleverpush)
+* [`unsubscribe()`](#unsubscribe)
+* [`enableDevelopmentMode()`](#enabledevelopmentmode)
+* [`showTopicsDialog()`](#showtopicsdialog)
+* [`isSubscribed()`](#issubscribed)
+* [`setAppBannerOpenedHandler()`](#setappbanneropenedhandler)
+* [`setNotificationReceivedHandler()`](#setnotificationreceivedhandler)
+* [`setNotificationOpenedHandler()`](#setnotificationopenedhandler)
+* [`setSubscribedHandler()`](#setsubscribedhandler)
+* [`addListener('notificationReceivedListener', ...)`](#addlistenernotificationreceivedlistener)
+* [`addListener('notificationOpenedListener', ...)`](#addlistenernotificationopenedlistener)
+* [`addListener('appBannerOpenedListener', ...)`](#addlistenerappbanneropenedlistener)
+* [`addListener('subscribedListener', ...)`](#addlistenersubscribedlistener)
+* [Interfaces](#interfaces)
 
 </docgen-index>
-
-<docgen-api>
-<!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
-
-### echo(...)
-
-```typescript
-echo(options: { value: string; }) => Promise<{ value: string; }>
-```
-
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ value: string; }</code> |
-
-**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
-
---------------------
-
-</docgen-api>

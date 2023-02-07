@@ -4,7 +4,7 @@ export default {
     {
       file: 'dist/plugin.js',
       format: 'iife',
-      name: 'capacitorCleverPushCapacitor',
+      name: 'capacitorCleverPushPlugin',
       globals: {
         '@capacitor/core': 'capacitorExports',
       },

@@ -1,11 +1,17 @@
 PODS:
-  - Capacitor (4.6.2):
+  - Capacitor (4.6.3):
     - CapacitorCordova
-  - CapacitorCordova (4.6.2)
+  - CapacitorCordova (4.6.3)
+  - CleverPush (1.22.1)
 
 DEPENDENCIES:
   - "Capacitor (from `../node_modules/@capacitor/ios`)"
   - "CapacitorCordova (from `../node_modules/@capacitor/ios`)"
+  - CleverPush
+
+SPEC REPOS:
+  trunk:
+    - CleverPush
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -14,9 +20,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@capacitor/ios"
 
 SPEC CHECKSUMS:
-  Capacitor: a83814f7b8678d3fbb8989324f51b442eafdb6f7
-  CapacitorCordova: 855dd572d01508c8992d5470e0dfe33ebb169c4d
+  Capacitor: 744b9eea76ac615076a15f1eb2a754f155012e54
+  CapacitorCordova: 4c146609d8f3a3ce164ed0996761759c65cc6402
+  CleverPush: a09f593613d0b8b450f6bca0571f074b6a4914d2
 
-PODFILE CHECKSUM: 14e8b2400457751b865e1c327e7cfa1c6fa67da6
+PODFILE CHECKSUM: 090c70dadb04e238d058b9ad62d047f59020c52f
 
 COCOAPODS: 1.11.3

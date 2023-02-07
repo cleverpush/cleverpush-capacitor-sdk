@@ -1,4 +1,4 @@
 import type { CleverPushCapacitorPlugin } from './definitions';
-declare const CleverPushCapacitor: CleverPushCapacitorPlugin;
+declare const CleverPushPlugin: CleverPushCapacitorPlugin;
 export * from './definitions';
-export { CleverPushCapacitor };
+export default CleverPushPlugin;

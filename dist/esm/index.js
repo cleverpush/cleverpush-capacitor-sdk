@@ -1,7 +1,5 @@
 import { registerPlugin } from '@capacitor/core';
-const CleverPushCapacitor = registerPlugin('CleverPushCapacitor', {
-    web: () => import('./web').then(m => new m.CleverPushCapacitorWeb()),
-});
+const CleverPushPlugin = registerPlugin('CleverPushPlugin', {});
 export * from './definitions';
-export { CleverPushCapacitor };
+export default CleverPushPlugin;
 //# sourceMappingURL=index.js.map
