@@ -4,7 +4,7 @@ export interface CleverPushCapacitorPlugin {
   echo(options: { value: string }): Promise<{ value: string }>;
   getSubscriptionId(): void;
   subscribe(): void;
-  initcleverPush(options: { channelId: string, autoRegister: boolean }): void;
+  initCleverPush(options: { channelId: string, autoRegister: boolean }): void;
   unsubscribe(): void;
   enableDevelopmentMode(): void;
   showTopicsDialog(): void;

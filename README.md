@@ -16,7 +16,7 @@ npx cap sync
 * [`echo(...)`](#echo)
 * [`getSubscriptionId()`](#getsubscriptionid)
 * [`subscribe()`](#subscribe)
-* [`initcleverPush(...)`](#initcleverpush)
+* [`initCleverPush(...)`](#initcleverpush)
 * [`unsubscribe()`](#unsubscribe)
 * [`enableDevelopmentMode()`](#enabledevelopmentmode)
 * [`showTopicsDialog()`](#showtopicsdialog)

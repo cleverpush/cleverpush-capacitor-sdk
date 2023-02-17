@@ -7,7 +7,7 @@ export interface CleverPushCapacitorPlugin {
     }>;
     getSubscriptionId(): void;
     subscribe(): void;
-    initcleverPush(options: {
+    initCleverPush(options: {
         channelId: string;
         autoRegister: boolean;
     }): void;

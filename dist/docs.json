@@ -42,7 +42,7 @@
         "slug": "subscribe"
       },
       {
-        "name": "initcleverPush",
+        "name": "initCleverPush",
         "signature": "(options: { channelId: string; autoRegister: boolean; }) => void",
         "parameters": [
           {
