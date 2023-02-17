@@ -1,11 +1,23 @@
 package com.cleverpush.plugins.capacitor;
 
-import android.util.Log;
-
 public class CleverPushPlugin {
 
-    public String echo(String value) {
-        Log.i("Echo", value);
+    public String getSubscriptionId(String value) {
+        System.out.println(value);
         return value;
     }
+
+    public boolean isSubscribed(boolean value) {
+        System.out.println(value);
+        return value;
+    }
+    public void unsubscribe () {}
+    public void subscribe () {}
+    public void enableDevelopmentMode() {}
+
+    public void initCleverPush() {
+
+    }
+    public void showTopicsDialog() {}
+
 }

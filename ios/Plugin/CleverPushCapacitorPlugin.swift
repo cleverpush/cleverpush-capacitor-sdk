@@ -82,10 +82,10 @@ public class CleverPushCapacitorPlugin: CAPPlugin {
                             actionObject["openBySystem"] =  action?.openBySystem
                         }
                         self.responseObject =  ["success": true, "data": actionObject]
-                        self.notifyListeners("notificationOpenedListener", data: self.responseObject)
+                        self.notifyListeners("appBannerOpenedListener", data: self.responseObject)
                     } else {
                         self.responseObject =  ["success": false, "error": "something went wrong"]
-                        self.notifyListeners("notificationOpenedListener", data: self.responseObject)
+                        self.notifyListeners("appBannerOpenedListener", data: self.responseObject)
                     }
                 }
             }
