@@ -1,6 +1,6 @@
 {
   "name": "cleverpush-capacitor-sdk",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "CleverPush Capacitor SDK",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -13,8 +13,8 @@
     "ios/Plugin/",
     "CleverpushCapacitorSdk.podspec"
   ],
-  "author": "gbhrdt",
-  "license": "MIT",
+  "author": "",
+  "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cleverpush/cleverpush-capacitor-sdk.git"
