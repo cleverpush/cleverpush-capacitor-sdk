@@ -1,7 +1,6 @@
 import type { PluginListenerHandle } from '@capacitor/core';
 
 export interface CleverPushCapacitorPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
   getSubscriptionId(): void;
   subscribe(): void;
   initCleverPush(options: { channelId: string, autoRegister: boolean }): void;

@@ -3,12 +3,10 @@ import Foundation
 @objc public class CleverPushPlugin: NSObject {
     
     @objc public func getSubscriptionId(_ value: String) -> String {
-        print(value)
         return value
     }
     
     @objc public func isSubscribed(_ value: Bool) -> Bool {
-        print(value)
         return value
     }
     

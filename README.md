@@ -13,7 +13,6 @@ npx cap sync
 
 <docgen-index>
 
-* [`echo(...)`](#echo)
 * [`getSubscriptionId()`](#getsubscriptionid)
 * [`subscribe()`](#subscribe)
 * [`initCleverPush(...)`](#initcleverpush)

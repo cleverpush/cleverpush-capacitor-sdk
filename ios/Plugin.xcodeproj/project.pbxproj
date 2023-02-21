@@ -8,10 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03FC29A292ACC40490383A1F /* Pods_Plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */; };
-		20C0B05DCFC8E3958A738AF2 /* Pods_PluginTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6753A823D3815DB436415E3 /* Pods_PluginTests.framework */; };
 		2F98D68224C9AAE500613A4C /* CleverPushPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F98D68124C9AAE400613A4C /* CleverPushPlugin.swift */; };
-		50ADFF92201F53D600D50D53 /* Plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50ADFF88201F53D600D50D53 /* Plugin.framework */; };
-		50ADFF97201F53D600D50D53 /* CleverPushPluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFF96201F53D600D50D53 /* CleverPushPluginTests.swift */; };
 		50ADFF99201F53D600D50D53 /* CleverPushCapacitorPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFF8B201F53D600D50D53 /* CleverPushCapacitorPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50ADFFA42020D75100D50D53 /* Capacitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50ADFFA52020D75100D50D53 /* Capacitor.framework */; };
 		50ADFFA82020EE4F00D50D53 /* CleverPushCapacitorPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFFA72020EE4F00D50D53 /* CleverPushCapacitorPlugin.m */; };
@@ -19,16 +16,6 @@
 		692D315C298154B600894FFA /* CleverPush.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692D3158298153F700894FFA /* CleverPush.xcframework */; };
 		692D315D298154B600894FFA /* CleverPush.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 692D3158298153F700894FFA /* CleverPush.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		50ADFF93201F53D600D50D53 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 50ADFF7F201F53D600D50D53 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 50ADFF87201F53D600D50D53;
-			remoteInfo = Plugin;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		692D315E298154B600894FFA /* Embed Frameworks */ = {
@@ -50,9 +37,6 @@
 		50ADFF88201F53D600D50D53 /* Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ADFF8B201F53D600D50D53 /* CleverPushCapacitorPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CleverPushCapacitorPlugin.h; sourceTree = "<group>"; };
 		50ADFF8C201F53D600D50D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		50ADFF91201F53D600D50D53 /* PluginTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PluginTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		50ADFF96201F53D600D50D53 /* CleverPushPluginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleverPushPluginTests.swift; sourceTree = "<group>"; };
-		50ADFF98201F53D600D50D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50ADFFA52020D75100D50D53 /* Capacitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Capacitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ADFFA72020EE4F00D50D53 /* CleverPushCapacitorPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CleverPushCapacitorPlugin.m; sourceTree = "<group>"; };
 		50E1A94720377CB70090CE1A /* CleverPushCapacitorPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CleverPushCapacitorPlugin.swift; sourceTree = "<group>"; };
@@ -75,15 +59,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		50ADFF8E201F53D600D50D53 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				50ADFF92201F53D600D50D53 /* Plugin.framework in Frameworks */,
-				20C0B05DCFC8E3958A738AF2 /* Pods_PluginTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,7 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				50ADFF8A201F53D600D50D53 /* Plugin */,
-				50ADFF95201F53D600D50D53 /* PluginTests */,
 				50ADFF89201F53D600D50D53 /* Products */,
 				8C8E7744173064A9F6D438E3 /* Pods */,
 				A797B9EFA3DCEFEA1FBB66A9 /* Frameworks */,
@@ -102,7 +76,6 @@
 			isa = PBXGroup;
 			children = (
 				50ADFF88201F53D600D50D53 /* Plugin.framework */,
-				50ADFF91201F53D600D50D53 /* PluginTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,15 +90,6 @@
 				50ADFF8C201F53D600D50D53 /* Info.plist */,
 			);
 			path = Plugin;
-			sourceTree = "<group>";
-		};
-		50ADFF95201F53D600D50D53 /* PluginTests */ = {
-			isa = PBXGroup;
-			children = (
-				50ADFF96201F53D600D50D53 /* CleverPushPluginTests.swift */,
-				50ADFF98201F53D600D50D53 /* Info.plist */,
-			);
-			path = PluginTests;
 			sourceTree = "<group>";
 		};
 		8C8E7744173064A9F6D438E3 /* Pods */ = {
@@ -185,27 +149,6 @@
 			productReference = 50ADFF88201F53D600D50D53 /* Plugin.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		50ADFF90201F53D600D50D53 /* PluginTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 50ADFF9F201F53D600D50D53 /* Build configuration list for PBXNativeTarget "PluginTests" */;
-			buildPhases = (
-				0596884F929ED6F1DE134961 /* [CP] Check Pods Manifest.lock */,
-				50ADFF8D201F53D600D50D53 /* Sources */,
-				50ADFF8E201F53D600D50D53 /* Frameworks */,
-				50ADFF8F201F53D600D50D53 /* Resources */,
-				8E97F58B69A94C6503FC9C85 /* [CP] Embed Pods Frameworks */,
-				A27188AADD9C8244343A4C2F /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				50ADFF94201F53D600D50D53 /* PBXTargetDependency */,
-			);
-			name = PluginTests;
-			productName = PluginTests;
-			productReference = 50ADFF91201F53D600D50D53 /* PluginTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -217,11 +160,6 @@
 				ORGANIZATIONNAME = "Max Lynch";
 				TargetAttributes = {
 					50ADFF87201F53D600D50D53 = {
-						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1100;
-						ProvisioningStyle = Automatic;
-					};
-					50ADFF90201F53D600D50D53 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
@@ -242,7 +180,6 @@
 			projectRoot = "";
 			targets = (
 				50ADFF87201F53D600D50D53 /* Plugin */,
-				50ADFF90201F53D600D50D53 /* PluginTests */,
 			);
 		};
 /* End PBXProject section */
@@ -255,74 +192,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		50ADFF8F201F53D600D50D53 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0596884F929ED6F1DE134961 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PluginTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8E97F58B69A94C6503FC9C85 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PluginTests/Pods-PluginTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Capacitor/Capacitor.framework",
-				"${BUILT_PRODUCTS_DIR}/CapacitorCordova/Cordova.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/CleverPush/CleverPush.framework/CleverPush",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Capacitor.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cordova.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CleverPush.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PluginTests/Pods-PluginTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A27188AADD9C8244343A4C2F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PluginTests/Pods-PluginTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/CleverPush/CleverPushResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CleverPushResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PluginTests/Pods-PluginTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AB5B3E54B4E897F32C2279DA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -372,23 +244,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		50ADFF8D201F53D600D50D53 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				50ADFF97201F53D600D50D53 /* CleverPushPluginTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		50ADFF94201F53D600D50D53 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 50ADFF87201F53D600D50D53 /* Plugin */;
-			targetProxy = 50ADFF93201F53D600D50D53 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		50ADFF9A201F53D600D50D53 /* Debug */ = {
@@ -578,42 +434,6 @@
 			};
 			name = Release;
 		};
-		50ADFFA0201F53D600D50D53 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96ED1B6440D6672E406C8D19 /* Pods-PluginTests.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = PluginTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.getcapacitor.PluginTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		50ADFFA1201F53D600D50D53 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F65BB2953ECE002E1EF3E424 /* Pods-PluginTests.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = PluginTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.getcapacitor.PluginTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -631,15 +451,6 @@
 			buildConfigurations = (
 				50ADFF9D201F53D600D50D53 /* Debug */,
 				50ADFF9E201F53D600D50D53 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		50ADFF9F201F53D600D50D53 /* Build configuration list for PBXNativeTarget "PluginTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				50ADFFA0201F53D600D50D53 /* Debug */,
-				50ADFFA1201F53D600D50D53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
