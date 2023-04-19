@@ -1,12 +1,144 @@
+#import "CleverPushCapacitorPlugin.h"
 #import <Foundation/Foundation.h>
-#import <Capacitor/Capacitor.h>
+#import <CleverPush/CleverPush.h>
+#import <objc/runtime.h>
+#import <Capacitor/Capacitor-Swift.h>
 
-CAP_PLUGIN(CleverPushCapacitorPlugin, "CleverPushPlugin",
-           CAP_PLUGIN_METHOD(getSubscriptionId, CAPPluginReturnPromise);
-           CAP_PLUGIN_METHOD(isSubscribed, CAPPluginReturnPromise);
-           CAP_PLUGIN_METHOD(unsubscribe, CAPPluginReturnNone);
-           CAP_PLUGIN_METHOD(subscribe, CAPPluginReturnNone);
-           CAP_PLUGIN_METHOD(enableDevelopmentMode, CAPPluginReturnNone);
-           CAP_PLUGIN_METHOD(initCleverPush, CAPPluginReturnNone);
-           CAP_PLUGIN_METHOD(showTopicsDialog, CAPPluginReturnNone);
-)
+NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+
+    unsigned count;
+    objc_property_t *properties = class_copyPropertyList([obj class], &count);
+
+    for (int i = 0; i < count; i++) {
+        NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
+        if ([obj valueForKey:key] != nil) {
+            if ([[obj valueForKey:key] isKindOfClass:[NSDate class]]) {
+                NSString *convertedDateString = [NSString stringWithFormat:@"%@", [obj valueForKey:key]];
+                [dict setObject:convertedDateString forKey:key];
+            } else {
+                [dict setObject:[obj valueForKey:key] forKey:key];
+            }
+        }
+    }
+    free(properties);
+    return [NSDictionary dictionaryWithDictionary:dict];
+}
+
+@implementation CleverPushCapacitorPlugin
+
+- (void)initCleverPushObjectWithLaunchOptions:(NSDictionary *)launchOptions channelId:(NSString *)channelId autoRegister:(BOOL)autoRegister {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [CleverPush initWithLaunchOptions:launchOptions channelId:channelId handleNotificationReceived:^(CPNotificationReceivedResult *result) {
+            if (self.pluginCallDelegate != nil) {
+                NSDictionary *notificationDictionary = dictionaryWithPropertiesOfObject(result.notification);
+                NSDictionary *subscriptionDictionary = dictionaryWithPropertiesOfObject(result.subscription);
+
+                NSMutableDictionary *obj = [NSMutableDictionary dictionary];
+                [obj setObject:notificationDictionary forKey:@"notification"];
+                [obj setObject:subscriptionDictionary forKey:@"subscription"];
+
+                [self notifyListeners:@"notificationReceived" data:obj];
+            }
+        } handleNotificationOpened:^(CPNotificationOpenedResult *result) {
+            if (self.pluginCallDelegate != nil) {
+                NSDictionary *notificationDictionary = dictionaryWithPropertiesOfObject(result.notification);
+                NSDictionary *subscriptionDictionary = dictionaryWithPropertiesOfObject(result.subscription);
+
+                NSMutableDictionary *obj = [NSMutableDictionary dictionary];
+                [obj setObject:notificationDictionary forKey:@"notification"];
+                [obj setObject:subscriptionDictionary forKey:@"subscription"];
+                if (result.action != nil) {
+                    [obj setObject:result.action forKey:@"action"];
+                }
+
+                [self notifyListeners:@"notificationOpened" data:obj];
+            }
+        } handleSubscribed:^(NSString *subscriptionId) {
+            [self notifyListeners:@"subscribed" data:@{@"subscriptionId": subscriptionId}];
+        } autoRegister:autoRegister];
+
+        [CleverPush setAppBannerOpenedCallback:^(CPAppBannerAction *action) {
+            if (self.pluginCallDelegate != nil && action != nil) {
+                NSDictionary *actionObject = dictionaryWithPropertiesOfObject(action);
+                [self notifyListeners:@"appBannerOpened" data:actionObject];
+            }
+        }];
+    });
+}
+
+- (void)getSubscriptionId:(CAPPluginCall *)call {
+    NSString *value = [CleverPush getSubscriptionId];
+    [call resolve:@{@"subscriptionId": value ?: @""}];
+}
+
+- (void)isSubscribed:(CAPPluginCall *)call {
+    BOOL value = [CleverPush isSubscribed];
+    [call resolve:@{@"isSubscribed": @(value)}];
+}
+
+- (void)unsubscribe {
+    [CleverPush unsubscribe];
+}
+
+- (void)subscribe:(CAPPluginCall *)call {
+    [CleverPush subscribe:^(NSString *subscriptionId) {
+        if (self.pluginCallDelegate != nil && call.callbackId != nil) {
+            [call resolve:@{@"subscriptionId": subscriptionId}];
+        }
+    } failure:^(NSError *error) {
+        if (self.pluginCallDelegate != nil && call.callbackId != nil) {
+            [call reject:error.localizedDescription ?: @"" :nil :nil :nil];
+        }
+    }];
+}
+
+- (void)showTopicsDialog:(CAPPluginCall *)call {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [CleverPush showTopicsDialog];
+    });
+}
+
+- (void)enableDevelopmentMode:(CAPPluginCall *)call {
+    [CleverPush enableDevelopmentMode];
+}
+
+- (void)init:(CAPPluginCall *)call {
+    self.pluginCallDelegate = call;
+
+    NSString *channelId = [call.options objectForKey:@"channelId"] ?: @"";
+    BOOL autoRegister = [call.options objectForKey:@"autoRegister"] != nil ? [[call.options objectForKey:@"autoRegister"] boolValue] : YES;
+    [self initCleverPushObjectWithLaunchOptions:self.pendingLaunchOptions channelId:channelId autoRegister:autoRegister];
+}
+
++ (CAPPluginMethod *)getMethod:(NSString *)methodName {
+    NSArray *methods = [self pluginMethods];
+    for (CAPPluginMethod *method in methods) {
+      if ([method.name isEqualToString:methodName]) {
+        return method;
+      }
+    }
+    return nil;
+}
+
++ (NSString *)jsName {
+    return @"CleverPush";
+}
+
++ (NSString *)pluginId {
+    return @"CleverPushCapacitorPlugin";
+}
+
++ (NSArray *)pluginMethods {
+    NSMutableArray *methods = [NSMutableArray new];
+    CAP_PLUGIN_METHOD(getSubscriptionId, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(isSubscribed, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(unsubscribe, CAPPluginReturnNone);
+    CAP_PLUGIN_METHOD(subscribe, CAPPluginReturnNone);
+    CAP_PLUGIN_METHOD(enableDevelopmentMode, CAPPluginReturnNone);
+    CAP_PLUGIN_METHOD(init, CAPPluginReturnNone);
+    CAP_PLUGIN_METHOD(showTopicsDialog, CAPPluginReturnNone);
+    return methods;
+}
+
+@end

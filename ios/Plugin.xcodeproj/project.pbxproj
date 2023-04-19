@@ -8,11 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		03FC29A292ACC40490383A1F /* Pods_Plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */; };
-		2F98D68224C9AAE500613A4C /* CleverPushPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F98D68124C9AAE400613A4C /* CleverPushPlugin.swift */; };
 		50ADFF99201F53D600D50D53 /* CleverPushCapacitorPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFF8B201F53D600D50D53 /* CleverPushCapacitorPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50ADFFA42020D75100D50D53 /* Capacitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50ADFFA52020D75100D50D53 /* Capacitor.framework */; };
 		50ADFFA82020EE4F00D50D53 /* CleverPushCapacitorPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFFA72020EE4F00D50D53 /* CleverPushCapacitorPlugin.m */; };
-		50E1A94820377CB70090CE1A /* CleverPushCapacitorPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E1A94720377CB70090CE1A /* CleverPushCapacitorPlugin.swift */; };
 		692D315C298154B600894FFA /* CleverPush.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692D3158298153F700894FFA /* CleverPush.xcframework */; };
 		692D315D298154B600894FFA /* CleverPush.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 692D3158298153F700894FFA /* CleverPush.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -32,14 +30,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2F98D68124C9AAE400613A4C /* CleverPushPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CleverPushPlugin.swift; sourceTree = "<group>"; };
 		3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ADFF88201F53D600D50D53 /* Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ADFF8B201F53D600D50D53 /* CleverPushCapacitorPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CleverPushCapacitorPlugin.h; sourceTree = "<group>"; };
 		50ADFF8C201F53D600D50D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50ADFFA52020D75100D50D53 /* Capacitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Capacitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ADFFA72020EE4F00D50D53 /* CleverPushCapacitorPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CleverPushCapacitorPlugin.m; sourceTree = "<group>"; };
-		50E1A94720377CB70090CE1A /* CleverPushCapacitorPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CleverPushCapacitorPlugin.swift; sourceTree = "<group>"; };
 		5E23F77F099397094342571A /* Pods-Plugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plugin/Pods-Plugin.debug.xcconfig"; sourceTree = "<group>"; };
 		692D3158298153F700894FFA /* CleverPush.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CleverPush.xcframework; path = Pods/CleverPush.xcframework; sourceTree = "<group>"; };
 		91781294A431A2A7CC6EB714 /* Pods-Plugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Plugin/Pods-Plugin.release.xcconfig"; sourceTree = "<group>"; };
@@ -83,8 +79,6 @@
 		50ADFF8A201F53D600D50D53 /* Plugin */ = {
 			isa = PBXGroup;
 			children = (
-				50E1A94720377CB70090CE1A /* CleverPushCapacitorPlugin.swift */,
-				2F98D68124C9AAE400613A4C /* CleverPushPlugin.swift */,
 				50ADFF8B201F53D600D50D53 /* CleverPushCapacitorPlugin.h */,
 				50ADFFA72020EE4F00D50D53 /* CleverPushCapacitorPlugin.m */,
 				50ADFF8C201F53D600D50D53 /* Info.plist */,
@@ -238,8 +232,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50E1A94820377CB70090CE1A /* CleverPushCapacitorPlugin.swift in Sources */,
-				2F98D68224C9AAE500613A4C /* CleverPushPlugin.swift in Sources */,
 				50ADFFA82020EE4F00D50D53 /* CleverPushCapacitorPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

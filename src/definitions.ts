@@ -1,31 +1,28 @@
 import type { PluginListenerHandle } from '@capacitor/core';
 
+
 export interface CleverPushCapacitorPlugin {
-  getSubscriptionId(): void;
+  init(options: { channelId: string, autoRegister: boolean }): void;
   subscribe(): void;
-  initCleverPush(options: { channelId: string, autoRegister: boolean }): void;
   unsubscribe(): void;
-  enableDevelopmentMode(): void;
+  isSubscribed(): Promise<{ isSubscribed: boolean }>;
+  getSubscriptionId(): Promise<{ subscriptionId: string }>;
   showTopicsDialog(): void;
-  isSubscribed(): boolean;
-  setAppBannerOpenedHandler(): void;
-  setNotificationReceivedHandler(): void;
-  setNotificationOpenedHandler(): void;
-  setSubscribedHandler(): void;
+  enableDevelopmentMode(): void;
   addListener(
-    eventName: 'notificationReceivedListener',
-    listenerFunc: (data: { success: boolean, data?: any, error?: any }) => void,
+    eventName: 'notificationReceived',
+    listenerFunc: (data: { notification?: any }) => void,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
   addListener(
-    eventName: 'notificationOpenedListener',
-    listenerFunc: (data: { success: boolean, data?: any, error?: any }) => void,
+    eventName: 'notificationOpened',
+    listenerFunc: (data: { notification?: any }) => void,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
   addListener(
-    eventName: 'appBannerOpenedListener',
-    listenerFunc: (data: { success: boolean, data?: any, error?: any }) => void,
+    eventName: 'appBannerOpened',
+    listenerFunc: (data: any) => void,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
   addListener(
-    eventName: 'subscribedListener',
-    listenerFunc: (data: { success: boolean, data?: any, error?: any }) => void,
+    eventName: 'subscribed',
+    listenerFunc: (data: { subscriptionId: string }) => void,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
 }

@@ -3,7 +3,7 @@ import { registerPlugin } from '@capacitor/core';
 import type { CleverPushCapacitorPlugin } from './definitions';
 
 const CleverPushPlugin = registerPlugin<CleverPushCapacitorPlugin>(
-  'CleverPushPlugin',
+  'CleverPush',
   {},
 );
 
