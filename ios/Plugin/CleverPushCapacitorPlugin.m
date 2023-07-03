@@ -77,7 +77,7 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
     [call resolve:@{@"isSubscribed": @(value)}];
 }
 
-- (void)unsubscribe {
+- (void)unsubscribe:(CAPPluginCall *)call {
     [CleverPush unsubscribe];
 }
 

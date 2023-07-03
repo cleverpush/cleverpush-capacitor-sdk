@@ -81,6 +81,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
     public void getSubscriptionId(PluginCall call) {
         CleverPush.getInstance(this.getActivity()).getSubscriptionId(subscriptionId -> {
             JSObject obj = new JSObject();
+            obj.put("subscriptionId", subscriptionId);
             call.resolve(obj);
         });
     }
@@ -94,8 +95,10 @@ public class CleverPushCapacitorPlugin extends Plugin {
     }
 
     @PluginMethod
-    public void unsubscribe() {
+    public void unsubscribe(PluginCall call) {
         CleverPush.getInstance(this.getActivity()).unsubscribe();
+        JSObject obj = new JSObject();
+        call.resolve(obj);
     }
 
     @PluginMethod

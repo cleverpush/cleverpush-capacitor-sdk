@@ -1,3 +1,6 @@
+## 1.1.3
+* Fixed crash when calling `unsubscribe()` on Android
+
 ## 1.1.2
 * Updated native iOS & Android SDKs
 
