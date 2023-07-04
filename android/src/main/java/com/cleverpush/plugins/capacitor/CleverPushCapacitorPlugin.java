@@ -86,10 +86,67 @@ public class CleverPushCapacitorPlugin extends Plugin {
     }
 
     @PluginMethod
+    public void trackPageView(PluginCall call) {
+        String value = call.getString("trackPage");
+        CleverPush.getInstance(this.getActivity).trackPageView(value);
+    }
+
+    @PluginMethod
+    public void addSubscriptionTag(PluginCall call) {
+        String value = call.getString("subscriptionTag");
+        CleverPush.getInstance(this.getActivity).addSubscriptionTag(value);
+    }
+
+    @PluginMethod
+    public void removeSubscriptionTag(PluginCall call) {
+        String value = call.getString("subscriptionTag");
+        CleverPush.getInstance(this.getActivity).removeSubscriptionTag(value);
+    }
+
+    @PluginMethod
+    public void hasSubscriptionTag(PluginCall call) {
+        String tag = call.getString("subscriptionTag");
+        boolean value = CleverPush.getInstance(this.getActivity()).hasSubscriptionTag(tag);
+        JSObject obj = new JSObject();
+        obj.put("success", value);
+        call.resolve(obj);
+    }
+
+    @PluginMethod
+    public void setSubscriptionTopics(PluginCall call) {
+        String[] value = call.getArray("topics");
+        CleverPush.getInstance(this.getActivity()).setSubscriptionTopics(value);
+    }
+
+    @PluginMethod
+    public void getSubscriptionTags(PluginCall call) {
+        JSArray topicsArray = CleverPush.getInstance(this.getActivity()).getSubscriptionTags();
+        JSObject obj = new JSObject();
+        obj.put("subscriptionTags", topicsArray);
+        call.resolve(obj);
+    }
+
+    @PluginMethod
+    public void getSubscriptionTopics(PluginCall call) {
+        JSArray topicsArray = CleverPush.getInstance(this.getActivity()).getSubscriptionTopics();
+        JSObject obj = new JSObject();
+        obj.put("subscriptionTopics", topicsArray);
+        call.resolve(obj);
+    }
+
+    @PluginMethod
+    public void getAvailableTopics(PluginCall call) {
+        JSArray topicsArray = CleverPush.getInstance(this.getActivity()).getAvailableTopics();
+        JSObject obj = new JSObject();
+        obj.put("availableTopics", topicsArray);
+        call.resolve(obj);
+    }
+
+    @PluginMethod
     public void isSubscribed(PluginCall call) {
         boolean value = CleverPush.getInstance(this.getActivity()).isSubscribed();
         JSObject obj = new JSObject();
-        obj.put("isSubscribed", value);
+        obj.put("success", value);
         call.resolve(obj);
     }
 

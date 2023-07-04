@@ -7,6 +7,14 @@ export interface CleverPushCapacitorPlugin {
   unsubscribe(): void;
   isSubscribed(): Promise<{ isSubscribed: boolean }>;
   getSubscriptionId(): Promise<{ subscriptionId: string }>;
+  trackPageView(options: { trackPage: string }): void;
+  addSubscriptionTag(options: { subscriptionTag: string }): void;
+  removeSubscriptionTag(options: { subscriptionTag: string }): void;
+  hasSubscriptionTag(options: { subscriptionTag: string }): Promise<{ success: boolean }>;
+  setSubscriptionTopics(options: { topics: string[] }): void;
+  getSubscriptionTags(): Promise<{ subscriptionTags: string[] }>;
+  getSubscriptionTopics(): Promise<{ subscriptionTopics: string[] }>;
+  getAvailableTopics(): Promise<{ availableTopics: Array<{ _id: string; name: string; }> }>;
   showTopicsDialog(): void;
   enableDevelopmentMode(): void;
   addListener(
