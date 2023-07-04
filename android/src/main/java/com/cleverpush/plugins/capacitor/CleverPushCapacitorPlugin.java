@@ -146,7 +146,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
     public void isSubscribed(PluginCall call) {
         boolean value = CleverPush.getInstance(this.getActivity()).isSubscribed();
         JSObject obj = new JSObject();
-        obj.put("success", value);
+        obj.put("isSubscribed", value);
         call.resolve(obj);
     }
 
