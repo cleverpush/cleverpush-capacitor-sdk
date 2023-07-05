@@ -87,28 +87,28 @@ public class CleverPushCapacitorPlugin extends Plugin {
 
     @PluginMethod
     public void trackPageView(PluginCall call) {
-        String value = call.getString("trackPage");
+        String value = call.getString("url");
         CleverPush.getInstance(this.getActivity).trackPageView(value);
     }
 
     @PluginMethod
     public void addSubscriptionTag(PluginCall call) {
-        String value = call.getString("subscriptionTag");
+        String value = call.getString("tagId");
         CleverPush.getInstance(this.getActivity).addSubscriptionTag(value);
     }
 
     @PluginMethod
     public void removeSubscriptionTag(PluginCall call) {
-        String value = call.getString("subscriptionTag");
+        String value = call.getString("tagId");
         CleverPush.getInstance(this.getActivity).removeSubscriptionTag(value);
     }
 
     @PluginMethod
     public void hasSubscriptionTag(PluginCall call) {
-        String tag = call.getString("subscriptionTag");
+        String tag = call.getString("tagId");
         boolean value = CleverPush.getInstance(this.getActivity()).hasSubscriptionTag(tag);
         JSObject obj = new JSObject();
-        obj.put("success", value);
+        obj.put("hasTag", value);
         call.resolve(obj);
     }
 
@@ -122,7 +122,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
     public void getSubscriptionTags(PluginCall call) {
         JSArray topicsArray = CleverPush.getInstance(this.getActivity()).getSubscriptionTags();
         JSObject obj = new JSObject();
-        obj.put("subscriptionTags", topicsArray);
+        obj.put("tagIds", topicsArray);
         call.resolve(obj);
     }
 
@@ -130,7 +130,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
     public void getSubscriptionTopics(PluginCall call) {
         JSArray topicsArray = CleverPush.getInstance(this.getActivity()).getSubscriptionTopics();
         JSObject obj = new JSObject();
-        obj.put("subscriptionTopics", topicsArray);
+        obj.put("topicIds", topicsArray);
         call.resolve(obj);
     }
 
@@ -138,7 +138,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
     public void getAvailableTopics(PluginCall call) {
         JSArray topicsArray = CleverPush.getInstance(this.getActivity()).getAvailableTopics();
         JSObject obj = new JSObject();
-        obj.put("availableTopics", topicsArray);
+        obj.put("topics", topicsArray);
         call.resolve(obj);
     }
 

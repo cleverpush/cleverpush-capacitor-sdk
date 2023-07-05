@@ -73,24 +73,24 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
 }
 
 - (void)trackPageView:(CAPPluginCall *)call {
-    NSString *value = [call getString:@"trackPage"];
+    NSString *value = [call getString:@"url"];
     [CleverPush trackPageView:value];
 }
 
 - (void)addSubscriptionTag:(CAPPluginCall *)call {
-    NSString *value = [call getString:@"subscriptionTag"];
+    NSString *value = [call getString:@"tagId"];
     [CleverPush addSubscriptionTag:value];
 }
 
 - (void)removeSubscriptionTag:(CAPPluginCall *)call {
-    NSString *value = [call getString:@"subscriptionTag"];
+    NSString *value = [call getString:@"tagId"];
     [CleverPush removeSubscriptionTag:value];
 }
 
 - (void)hasSubscriptionTag:(CAPPluginCall *)call {
-    NSString *tag = [call getString:@"subscriptionTag"];
+    NSString *tag = [call getString:@"tagId"];
     BOOL value = [CleverPush hasSubscriptionTag:tag];
-    [call resolve:@{@"success": @(value)}];
+    [call resolve:@{@"hasTag": @(value)}];
 }
 
 - (void)setSubscriptionTopics:(CAPPluginCall *)call {
@@ -100,17 +100,17 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
 
 - (void)getSubscriptionTags:(CAPPluginCall *)call {
     NSArray *value = [CleverPush getSubscriptionTags];
-    [call resolve:@{@"subscriptionTags": value ?: @[]}];
+    [call resolve:@{@"tagIds": value ?: @[]}];
 }
 
 - (void)getSubscriptionTopics:(CAPPluginCall *)call {
     NSArray *value = [CleverPush getSubscriptionTopics];
-    [call resolve:@{@"subscriptionTopics": value ?: @[]}];
+    [call resolve:@{@"topicIds": value ?: @[]}];
 }
 
 - (void)getAvailableTopics:(CAPPluginCall *)call {
     NSArray *value = [CleverPush getAvailableTopics];
-    [call resolve:@{@"availableTopics": value ?: @[]}];
+    [call resolve:@{@"topics": value ?: @[]}];
 }
 
 - (void)isSubscribed:(CAPPluginCall *)call {
