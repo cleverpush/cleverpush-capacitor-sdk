@@ -1,3 +1,6 @@
+## 1.2.0
+* Added new methods
+
 ## 1.1.3
 * Fixed crash when calling `unsubscribe()` on Android
 
