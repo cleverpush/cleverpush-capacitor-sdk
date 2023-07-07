@@ -1,16 +1,24 @@
 package com.cleverpush.plugins.capacitor;
 
+import com.cleverpush.ChannelTopic;
 import com.cleverpush.CleverPush;
+import com.cleverpush.listener.ChannelTopicsListener;
 import com.cleverpush.listener.NotificationOpenedListener;
 import com.cleverpush.listener.NotificationReceivedListener;
 import com.cleverpush.listener.SubscribedListener;
 import com.cleverpush.listener.SubscribedCallbackListener;
+import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
+import com.getcapacitor.PluginResult;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
+import java.util.List;
+import java.util.Set;
 
 @CapacitorPlugin(name = "CleverPush")
 public class CleverPushCapacitorPlugin extends Plugin {
@@ -82,6 +90,72 @@ public class CleverPushCapacitorPlugin extends Plugin {
         CleverPush.getInstance(this.getActivity()).getSubscriptionId(subscriptionId -> {
             JSObject obj = new JSObject();
             obj.put("subscriptionId", subscriptionId);
+            call.resolve(obj);
+        });
+    }
+
+    @PluginMethod
+    public void trackPageView(PluginCall call) {
+        String value = call.getString("url");
+        CleverPush.getInstance(this.getActivity()).trackPageView(value);
+    }
+
+    @PluginMethod
+    public void addSubscriptionTag(PluginCall call) {
+        String value = call.getString("tagId");
+        CleverPush.getInstance(this.getActivity()).addSubscriptionTag(value);
+    }
+
+    @PluginMethod
+    public void removeSubscriptionTag(PluginCall call) {
+        String value = call.getString("tagId");
+        CleverPush.getInstance(this.getActivity()).removeSubscriptionTag(value);
+    }
+
+    @PluginMethod
+    public void hasSubscriptionTag(PluginCall call) {
+        String tag = call.getString("tagId");
+        boolean value = CleverPush.getInstance(this.getActivity()).hasSubscriptionTag(tag);
+        JSObject obj = new JSObject();
+        obj.put("hasTag", value);
+        call.resolve(obj);
+    }
+
+    @PluginMethod
+    public void setSubscriptionTopics(PluginCall call) throws JSONException {
+        JSArray topicsArray = call.getArray("topics");
+
+        if (topicsArray != null) {
+            String[] value = new String[topicsArray.length()];
+            for (int i = 0; i < topicsArray.length(); i++) {
+                value[i] = topicsArray.getString(i);
+            }
+            CleverPush.getInstance(this.getActivity()).setSubscriptionTopics(value);
+        } 
+    }
+
+    @PluginMethod
+    public void getSubscriptionTags(PluginCall call) {
+        Set<String> subscriptionTags = CleverPush.getInstance(this.getActivity()).getSubscriptionTags();
+        JSObject result = new JSObject();
+        result.put("tagIds", subscriptionTags);
+        call.resolve(result);
+    }
+
+    @PluginMethod
+    public void getSubscriptionTopics(PluginCall call) {
+        Set<String> subscriptionTopics = CleverPush.getInstance(this.getActivity()).getSubscriptionTopics();
+        JSObject obj = new JSObject();
+        obj.put("topicIds", subscriptionTopics);
+        call.resolve(obj);
+    }
+
+    @PluginMethod
+    public void getAvailableTopics(PluginCall call) {
+        CleverPush.getInstance(this.getActivity()).getAvailableTopics(topics -> {
+            Set<ChannelTopic> channelTopic = topics;
+            JSObject obj = new JSObject();
+            obj.put("topics", channelTopic);
             call.resolve(obj);
         });
     }
