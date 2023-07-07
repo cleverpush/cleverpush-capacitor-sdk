@@ -73,44 +73,45 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
 }
 
 - (void)trackPageView:(CAPPluginCall *)call {
-    NSString *value = [call getString:@"url"];
-    [CleverPush trackPageView:value];
+    NSString *url = [call.options objectForKey:@"url"] ?: @"";
+    [CleverPush trackPageView:url];
 }
 
 - (void)addSubscriptionTag:(CAPPluginCall *)call {
-    NSString *value = [call getString:@"tagId"];
-    [CleverPush addSubscriptionTag:value];
+    NSString *tagId = [call.options objectForKey:@"tagId"] ?: @"";
+    [CleverPush addSubscriptionTag:tagId];
 }
 
 - (void)removeSubscriptionTag:(CAPPluginCall *)call {
-    NSString *value = [call getString:@"tagId"];
-    [CleverPush removeSubscriptionTag:value];
+    NSString *tagId = [call.options objectForKey:@"tagId"] ?: @"";
+    [CleverPush removeSubscriptionTag:tagId];
 }
 
 - (void)hasSubscriptionTag:(CAPPluginCall *)call {
-    NSString *tag = [call getString:@"tagId"];
-    BOOL value = [CleverPush hasSubscriptionTag:tag];
-    [call resolve:@{@"hasTag": @(value)}];
-}
-
-- (void)setSubscriptionTopics:(CAPPluginCall *)call {
-    NSArray *value = [call getArray:@"topics"];
-    [CleverPush setSubscriptionTopics:value];
+    NSString *tagId = [call.options objectForKey:@"tagId"] ?: @"";
+    BOOL hasTag = [CleverPush hasSubscriptionTag:tagId];
+    [call resolve:@{@"hasTag": @(hasTag)}];
 }
 
 - (void)getSubscriptionTags:(CAPPluginCall *)call {
-    NSArray *value = [CleverPush getSubscriptionTags];
-    [call resolve:@{@"tagIds": value ?: @[]}];
+    NSMutableArray *tagIds = [[CleverPush getSubscriptionTags] mutableCopy];
+    [call resolve:@{@"tagId": tagIds}];
 }
 
 - (void)getSubscriptionTopics:(CAPPluginCall *)call {
-    NSArray *value = [CleverPush getSubscriptionTopics];
-    [call resolve:@{@"topicIds": value ?: @[]}];
+    NSMutableArray *topicIds = [[CleverPush getSubscriptionTopics] mutableCopy];
+    [call resolve:@{@"topicIds": topicIds}];
+}
+
+- (void)setSubscriptionTopics:(CAPPluginCall *)call {
+    NSMutableArray *topics = [[call.options valueForKey:@"topics"] mutableCopy];
+    [CleverPush setSubscriptionTopics:topics];
 }
 
 - (void)getAvailableTopics:(CAPPluginCall *)call {
-    NSArray *value = [CleverPush getAvailableTopics];
-    [call resolve:@{@"topics": value ?: @[]}];
+    [CleverPush getAvailableTopics:^(NSArray<CPChannelTopic *> *topicsArray) {
+        [call resolve:@{@"topics": topicsArray}];
+    }];
 }
 
 - (void)isSubscribed:(CAPPluginCall *)call {
@@ -118,7 +119,7 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
     [call resolve:@{@"isSubscribed": @(value)}];
 }
 
-- (void)unsubscribe {
+- (void)unsubscribe:(CAPPluginCall *)call {
     [CleverPush unsubscribe];
 }
 
@@ -173,20 +174,20 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
 + (NSArray *)pluginMethods {
     NSMutableArray *methods = [NSMutableArray new];
     CAP_PLUGIN_METHOD(getSubscriptionId, CAPPluginReturnPromise);
-    CAP_PLUGIN_METHOD(trackPageView, CAPPluginReturnNone);
-    CAP_PLUGIN_METHOD(addSubscriptionTag, CAPPluginReturnNone);
-    CAP_PLUGIN_METHOD(removeSubscriptionTag, CAPPluginReturnNone);
-    CAP_PLUGIN_METHOD(hasSubscriptionTag, CAPPluginReturnPromise);
-    CAP_PLUGIN_METHOD(setSubscriptionTopics, CAPPluginReturnNone);
-    CAP_PLUGIN_METHOD(getSubscriptionTags, CAPPluginReturnPromise);
-    CAP_PLUGIN_METHOD(getSubscriptionTopics, CAPPluginReturnPromise);
-    CAP_PLUGIN_METHOD(getAvailableTopics, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(isSubscribed, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(unsubscribe, CAPPluginReturnNone);
     CAP_PLUGIN_METHOD(subscribe, CAPPluginReturnNone);
     CAP_PLUGIN_METHOD(enableDevelopmentMode, CAPPluginReturnNone);
     CAP_PLUGIN_METHOD(init, CAPPluginReturnNone);
     CAP_PLUGIN_METHOD(showTopicsDialog, CAPPluginReturnNone);
+    CAP_PLUGIN_METHOD(trackPageView, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(addSubscriptionTag, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(removeSubscriptionTag, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(hasSubscriptionTag, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(getSubscriptionTags, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(getSubscriptionTopics, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(setSubscriptionTopics, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(getAvailableTopics, CAPPluginReturnPromise);
     return methods;
 }
 

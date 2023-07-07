@@ -7,16 +7,16 @@ export interface CleverPushCapacitorPlugin {
   unsubscribe(): void;
   isSubscribed(): Promise<{ isSubscribed: boolean }>;
   getSubscriptionId(): Promise<{ subscriptionId: string }>;
-  trackPageView(url: string): void;
-  addSubscriptionTag(tagId: string): void;
-  removeSubscriptionTag(tagId: string): void;
-  hasSubscriptionTag(tagId: string): Promise<{ hasTag: boolean }>;
-  setSubscriptionTopics(topics: string[]): void;
-  getSubscriptionTags(): Promise<{ tagIds: string[] }>;
-  getSubscriptionTopics(): Promise<{ topicIds: string[] }>;
-  getAvailableTopics(): Promise<{ topics: Array<{ _id: string; name: string; }> }>;
   showTopicsDialog(): void;
   enableDevelopmentMode(): void;
+  trackPageView(options: { url: string }): void;
+  addSubscriptionTag(options: { tagId: string }): void;
+  removeSubscriptionTag(options: { tagId: string }): void;
+  hasSubscriptionTag(options: { tagId: string}): Promise<{ hasTag: boolean }>;
+  getSubscriptionTags(): Promise<{ tagIds: string[] }>;
+  getSubscriptionTopics(): Promise<{ topicIds: string[] }>;
+  setSubscriptionTopics(options: { topics: string[] }): void;
+  getAvailableTopics(): Promise<{ topics: Array<{ _id: string; name: string; }> }>;
   addListener(
     eventName: 'notificationReceived',
     listenerFunc: (data: { notification?: any }) => void,
@@ -34,3 +34,4 @@ export interface CleverPushCapacitorPlugin {
     listenerFunc: (data: { subscriptionId: string }) => void,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
 }
+
