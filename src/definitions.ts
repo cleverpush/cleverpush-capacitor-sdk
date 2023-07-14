@@ -10,13 +10,14 @@ export interface CleverPushCapacitorPlugin {
   showTopicsDialog(): void;
   enableDevelopmentMode(): void;
   trackPageView(options: { url: string }): void;
+  trackEvent(options: { eventName: string, properties?: Record<string, unknown> }): void;
   addSubscriptionTag(options: { tagId: string }): void;
   removeSubscriptionTag(options: { tagId: string }): void;
   hasSubscriptionTag(options: { tagId: string}): Promise<{ hasTag: boolean }>;
   getSubscriptionTags(): Promise<{ tagIds: string[] }>;
   getSubscriptionTopics(): Promise<{ topicIds: string[] }>;
   setSubscriptionTopics(options: { topics: string[] }): void;
-  getAvailableTopics(): Promise<{ topics: Array<{ _id: string; name: string; }> }>;
+  getAvailableTopics(): Promise<{ topics: { _id: string; name: string; }[] }>;
   addListener(
     eventName: 'notificationReceived',
     listenerFunc: (data: { notification?: any }) => void,

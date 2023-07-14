@@ -16,6 +16,10 @@ import com.getcapacitor.PluginResult;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import org.json.JSONException;
 import java.util.List;
 import java.util.Set;
@@ -98,6 +102,27 @@ public class CleverPushCapacitorPlugin extends Plugin {
     public void trackPageView(PluginCall call) {
         String value = call.getString("url");
         CleverPush.getInstance(this.getActivity()).trackPageView(value);
+    }
+
+    @PluginMethod
+    public void trackEvent(PluginCall call) {
+        String eventName = call.getString("eventName");
+        JSObject propertiesObject = call.getObject("properties");
+        if (propertiesObject != null) {
+            Iterator<String> keysIter = propertiesObject.keys();
+            List<String> keys = new ArrayList<>();
+            Map<String, Object> properties = new HashMap<>();
+            while (keysIter.hasNext()) {
+                String key = keysIter.next();
+                String value = propertiesObject.getString(key);
+                if (value != null) {
+                    properties.put(key, value);
+                }
+            }
+            CleverPush.getInstance(this.getActivity()).trackEvent(eventName, properties);
+        } else {
+            CleverPush.getInstance(this.getActivity()).trackEvent(eventName);
+        }
     }
 
     @PluginMethod

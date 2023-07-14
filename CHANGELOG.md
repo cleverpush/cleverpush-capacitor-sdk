@@ -1,3 +1,6 @@
+## 1.2.1
+* Added `trackEvent` method
+
 ## 1.2.0
 * Added new methods
 

@@ -77,6 +77,16 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
     [CleverPush trackPageView:url];
 }
 
+- (void)trackEvent:(CAPPluginCall *)call {
+    NSString *eventName = [call.options objectForKey:@"eventName"] ?: @"";
+    NSDictionary *properties = [call.options objectForKey:@"properties"] ?: @"";
+    if (properties != nil) {
+        [CleverPush trackEvent:eventName properties:properties];
+    } else {
+        [CleverPush trackEvent:eventName];
+    }
+}
+
 - (void)addSubscriptionTag:(CAPPluginCall *)call {
     NSString *tagId = [call.options objectForKey:@"tagId"] ?: @"";
     [CleverPush addSubscriptionTag:tagId];
@@ -181,6 +191,7 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
     CAP_PLUGIN_METHOD(init, CAPPluginReturnNone);
     CAP_PLUGIN_METHOD(showTopicsDialog, CAPPluginReturnNone);
     CAP_PLUGIN_METHOD(trackPageView, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(trackEvent, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(addSubscriptionTag, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(removeSubscriptionTag, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(hasSubscriptionTag, CAPPluginReturnPromise);
