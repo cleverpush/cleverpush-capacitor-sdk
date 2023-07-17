@@ -155,6 +155,11 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
     [CleverPush enableDevelopmentMode];
 }
 
+- (void)setAuthorizerToken:(CAPPluginCall *)call {
+    NSString *token = [call.options objectForKey:@"token"] ?: @"";
+    [CleverPush setAuthorizerToken:token];
+}
+
 - (void)init:(CAPPluginCall *)call {
     self.pluginCallDelegate = call;
 
@@ -188,6 +193,7 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
     CAP_PLUGIN_METHOD(unsubscribe, CAPPluginReturnNone);
     CAP_PLUGIN_METHOD(subscribe, CAPPluginReturnNone);
     CAP_PLUGIN_METHOD(enableDevelopmentMode, CAPPluginReturnNone);
+    CAP_PLUGIN_METHOD(setAuthorizerToken, CAPPluginReturnNone);
     CAP_PLUGIN_METHOD(init, CAPPluginReturnNone);
     CAP_PLUGIN_METHOD(showTopicsDialog, CAPPluginReturnNone);
     CAP_PLUGIN_METHOD(trackPageView, CAPPluginReturnPromise);

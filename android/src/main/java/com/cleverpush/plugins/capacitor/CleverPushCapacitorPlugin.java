@@ -226,4 +226,10 @@ public class CleverPushCapacitorPlugin extends Plugin {
     public void enableDevelopmentMode(PluginCall call) {
         CleverPush.getInstance(this.getActivity()).enableDevelopmentMode();
     }
+
+    @PluginMethod
+    public void setAuthorizerToken(PluginCall call) {
+        String token = call.getString("token");
+        CleverPush.getInstance(this.getActivity()).setAuthorizerToken(token);
+    }
 }

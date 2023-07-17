@@ -1,6 +1,6 @@
 {
   "name": "cleverpush-capacitor-sdk",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "CleverPush Capacitor SDK",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

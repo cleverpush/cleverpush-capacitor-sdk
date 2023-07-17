@@ -1,3 +1,6 @@
+## 1.2.2
+* Added `setAuthorizerToken` method
+
 ## 1.2.1
 * Added `trackEvent` method
 

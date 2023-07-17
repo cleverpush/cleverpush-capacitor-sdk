@@ -18,6 +18,7 @@ export interface CleverPushCapacitorPlugin {
   getSubscriptionTopics(): Promise<{ topicIds: string[] }>;
   setSubscriptionTopics(options: { topics: string[] }): void;
   getAvailableTopics(): Promise<{ topics: { _id: string; name: string; }[] }>;
+  setAuthorizerToken(options: { token: string }): void;
   addListener(
     eventName: 'notificationReceived',
     listenerFunc: (data: { notification?: any }) => void,
