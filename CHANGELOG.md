@@ -1,3 +1,6 @@
+## 1.2.3
+* Fixed `notificationOpened` event for iOS cold boots
+
 ## 1.2.2
 * Added `setAuthorizerToken` method
 

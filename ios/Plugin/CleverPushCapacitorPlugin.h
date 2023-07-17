@@ -16,6 +16,6 @@ FOUNDATION_EXPORT const unsigned char PluginVersionString[];
 @interface CleverPushCapacitorPlugin : CAPPlugin <CAPBridgedPlugin>
 
 @property (nonatomic, strong) CAPPluginCall *pluginCallDelegate;
-@property (nonatomic, strong) NSDictionary *pendingLaunchOptions;
+@property (class, nonatomic, strong) NSDictionary *pendingLaunchOptions;
 
 @end

@@ -27,6 +27,10 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
 
 @implementation CleverPushCapacitorPlugin
 
+static NSString * _pendingLaunchOptions;
++ (NSString *)pendingLaunchOptions { return _pendingLaunchOptions; }
++ (void)setPendingLaunchOptions:(NSString *)pendingLaunchOptions { _pendingLaunchOptions = pendingLaunchOptions; }
+
 - (void)initCleverPushObjectWithLaunchOptions:(NSDictionary *)launchOptions channelId:(NSString *)channelId autoRegister:(BOOL)autoRegister {
     dispatch_async(dispatch_get_main_queue(), ^{
         [CleverPush initWithLaunchOptions:launchOptions channelId:channelId handleNotificationReceived:^(CPNotificationReceivedResult *result) {
@@ -165,7 +169,7 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
 
     NSString *channelId = [call.options objectForKey:@"channelId"] ?: @"";
     BOOL autoRegister = [call.options objectForKey:@"autoRegister"] != nil ? [[call.options objectForKey:@"autoRegister"] boolValue] : YES;
-    [self initCleverPushObjectWithLaunchOptions:self.pendingLaunchOptions channelId:channelId autoRegister:autoRegister];
+    [self initCleverPushObjectWithLaunchOptions:CleverPushCapacitorPlugin.pendingLaunchOptions channelId:channelId autoRegister:autoRegister];
 }
 
 + (CAPPluginMethod *)getMethod:(NSString *)methodName {
