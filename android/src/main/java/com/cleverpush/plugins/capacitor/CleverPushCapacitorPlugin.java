@@ -26,6 +26,7 @@ import java.util.Set;
 
 @CapacitorPlugin(name = "CleverPush")
 public class CleverPushCapacitorPlugin extends Plugin {
+    private JSObject coldStartOpenObject = null;
 
     @PluginMethod
     public void init(PluginCall call) {
@@ -47,7 +48,11 @@ public class CleverPushCapacitorPlugin extends Plugin {
                     try {
                         obj.put("notification", new JSObject(gson.toJson(result.getNotification())));
                         obj.put("subscription", new JSObject(gson.toJson(result.getSubscription())));
-                        notifyListeners("notificationOpened", obj);
+                        if (hasListeners("notificationOpened")) {
+                            notifyListeners("notificationOpened", obj);
+                        } else {
+                            coldStartOpenObject = obj;
+                        }
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
@@ -87,6 +92,16 @@ public class CleverPushCapacitorPlugin extends Plugin {
             actionObj.put("openBySystem", action.isOpenBySystem());
             notifyListeners("appBannerOpened", actionObj);
         });
+    }
+
+    @PluginMethod(returnType = PluginMethod.RETURN_NONE)
+    public void addListener(PluginCall call) {
+        super.addListener(call);
+        String eventName = call.getString("eventName");
+        if (coldStartOpenObject != null && eventName != null && eventName.equals("notificationOpened")) {
+            notifyListeners("notificationOpened", coldStartOpenObject);
+            coldStartOpenObject = null;
+        }
     }
 
     @PluginMethod

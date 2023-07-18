@@ -1,3 +1,6 @@
+## 1.2.4
+* Fixed `notificationOpened` event for Android cold boots (when init is delayed)
+
 ## 1.2.3
 * Fixed `notificationOpened` event for iOS cold boots
 
