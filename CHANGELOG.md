@@ -1,3 +1,6 @@
+## 1.2.5
+* Updated native iOS & Android SDKs
+
 ## 1.2.4
 * Fixed `notificationOpened` event for Android cold boots (when init is delayed)
 
