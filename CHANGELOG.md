@@ -1,3 +1,6 @@
+## 1.2.6
+* Added support for Capacitor version 5.2.2+
+
 ## 1.2.5
 * Updated native iOS & Android SDKs
 
