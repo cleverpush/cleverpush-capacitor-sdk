@@ -1,3 +1,6 @@
+## 1.3.0
+* Added `getNotifications` method
+
 ## 1.2.6
 * Added support for Capacitor version 5.2.2+
 
@@ -21,7 +24,7 @@
 
 ## 1.1.3
 * Fixed crash when calling `unsubscribe()` on Android
-
+     
 ## 1.1.2
 * Updated native iOS & Android SDKs
 

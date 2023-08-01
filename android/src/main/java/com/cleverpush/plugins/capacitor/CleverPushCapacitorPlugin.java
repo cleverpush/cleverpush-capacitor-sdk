@@ -2,27 +2,25 @@ package com.cleverpush.plugins.capacitor;
 
 import com.cleverpush.ChannelTopic;
 import com.cleverpush.CleverPush;
-import com.cleverpush.listener.ChannelTopicsListener;
+import com.cleverpush.Notification;
 import com.cleverpush.listener.NotificationOpenedListener;
 import com.cleverpush.listener.NotificationReceivedListener;
-import com.cleverpush.listener.SubscribedListener;
 import com.cleverpush.listener.SubscribedCallbackListener;
+import com.cleverpush.listener.SubscribedListener;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
-import com.getcapacitor.PluginResult;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
-import org.json.JSONException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import org.json.JSONException;
 
 @CapacitorPlugin(name = "CleverPush")
 public class CleverPushCapacitorPlugin extends Plugin {
@@ -246,5 +244,23 @@ public class CleverPushCapacitorPlugin extends Plugin {
     public void setAuthorizerToken(PluginCall call) {
         String token = call.getString("token");
         CleverPush.getInstance(this.getActivity()).setAuthorizerToken(token);
+    }
+
+    @PluginMethod
+    public void getNotifications(PluginCall call) {
+        Gson gson = new Gson();
+        Set<Notification> notifications = CleverPush.getInstance(this.getActivity()).getNotifications();
+        JSArray notificationsArray = new JSArray();
+        for (Notification notification : notifications) {
+            try {
+                JSObject notificationObj = new JSObject(gson.toJson(notification));
+                notificationsArray.put(notificationObj);
+            } catch (Exception ex) {
+                System.out.println("Exception while getting notifications: " + ex.getMessage());
+            }
+        }
+        JSObject result = new JSObject();
+        result.put("notifications", notificationsArray);
+        call.resolve(result);
     }
 }

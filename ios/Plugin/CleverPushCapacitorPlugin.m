@@ -164,6 +164,15 @@ static NSString * _pendingLaunchOptions;
     [CleverPush setAuthorizerToken:token];
 }
 
+- (void)getNotifications:(CAPPluginCall *)call {
+    NSArray *notifications = [CleverPush getNotifications];
+    NSMutableArray *notificationsArray = [NSMutableArray array];
+    for (CPNotification *notification in notifications) {
+        [notificationsArray addObject:dictionaryWithPropertiesOfObject(notification)];
+    }
+    [call resolve:@{@"notifications": notificationsArray}];
+}
+
 - (void)init:(CAPPluginCall *)call {
     self.pluginCallDelegate = call;
 
@@ -209,6 +218,7 @@ static NSString * _pendingLaunchOptions;
     CAP_PLUGIN_METHOD(getSubscriptionTopics, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(setSubscriptionTopics, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(getAvailableTopics, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(getNotifications, CAPPluginReturnPromise);
     return methods;
 }
 
