@@ -17,5 +17,8 @@ FOUNDATION_EXPORT const unsigned char PluginVersionString[];
 
 @property (nonatomic, strong) CAPPluginCall *pluginCallDelegate;
 @property (class, nonatomic, strong) NSDictionary *pendingLaunchOptions;
+@property (nonatomic, strong) NSString *identifier;
+@property (nonatomic, strong) NSString *jsName;
+@property (nonatomic, strong) NSArray *pluginMethods;
 
 @end
