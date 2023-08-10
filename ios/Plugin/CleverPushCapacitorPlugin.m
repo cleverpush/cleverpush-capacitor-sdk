@@ -195,6 +195,10 @@ static NSString * _pendingLaunchOptions;
     return @"CleverPush";
 }
 
++ (NSString *)identifier {
+    return @"CleverPushCapacitorPlugin";
+}
+
 + (NSString *)pluginId {
     return @"CleverPushCapacitorPlugin";
 }
@@ -221,5 +225,11 @@ static NSString * _pendingLaunchOptions;
     CAP_PLUGIN_METHOD(getNotifications, CAPPluginReturnPromise);
     return methods;
 }
+
+@synthesize identifier;
+
+@synthesize jsName;
+
+@synthesize pluginMethods;
 
 @end
