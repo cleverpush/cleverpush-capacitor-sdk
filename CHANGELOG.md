@@ -1,3 +1,6 @@
+## 1.3.1
+* Hotfix for iOS with Capacitor >= 5
+
 ## 1.3.0
 * Added `getNotifications` method
 
