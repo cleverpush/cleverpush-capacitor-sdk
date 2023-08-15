@@ -1,3 +1,6 @@
+## 1.3.2
+* Fixed return type for `subscribe` method
+
 ## 1.3.1
 * Hotfix for iOS with Capacitor >= 5
 
