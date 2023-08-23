@@ -48,7 +48,9 @@ static void injectSelector(Class newClass, SEL newSel, Class addToClass, SEL mak
 }
 
 - (BOOL)cleverPushApplication:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
-    CleverPushCapacitorPlugin.pendingLaunchOptions = launchOptions;
+    if (launchOptions != nil) {
+        CleverPushCapacitorPlugin.pendingLaunchOptions = launchOptions;
+    }
 
     if ([self respondsToSelector:@selector(cleverPushApplication:didFinishLaunchingWithOptions:)]) {
       return [self cleverPushApplication:application didFinishLaunchingWithOptions:launchOptions];
