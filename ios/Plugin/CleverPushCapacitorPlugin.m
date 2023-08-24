@@ -181,29 +181,15 @@ static NSString * _pendingLaunchOptions;
     [self initCleverPushObjectWithLaunchOptions:CleverPushCapacitorPlugin.pendingLaunchOptions channelId:channelId autoRegister:autoRegister];
 }
 
-+ (CAPPluginMethod *)getMethod:(NSString *)methodName {
-    NSArray *methods = [self pluginMethods];
-    for (CAPPluginMethod *method in methods) {
-      if ([method.name isEqualToString:methodName]) {
-        return method;
-      }
-    }
-    return nil;
-}
-
-+ (NSString *)jsName {
+- (NSString *)jsName {
     return @"CleverPush";
 }
 
-+ (NSString *)identifier {
+- (NSString *)identifier {
     return @"CleverPushCapacitorPlugin";
 }
 
-+ (NSString *)pluginId {
-    return @"CleverPushCapacitorPlugin";
-}
-
-+ (NSArray *)pluginMethods {
+- (NSArray *)pluginMethods {
     NSMutableArray *methods = [NSMutableArray new];
     CAP_PLUGIN_METHOD(getSubscriptionId, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(isSubscribed, CAPPluginReturnPromise);
