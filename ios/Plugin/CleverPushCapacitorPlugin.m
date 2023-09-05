@@ -128,6 +128,29 @@ static NSString * _pendingLaunchOptions;
     }];
 }
 
+- (void)setSubscriptionAttribute:(CAPPluginCall *)call {
+    NSString *attributeId = [call.options objectForKey:@"attributeId"] ?: @"";
+    NSString *value = [call.options objectForKey:@"value"] ?: @"";
+    [CleverPush setSubscriptionAttribute:attributeId value:value];
+}
+
+- (void)getSubscriptionAttribute:(CAPPluginCall *)call {
+    NSString *attributeId = [call.options objectForKey:@"attributeId"] ?: @"";
+    NSString *value = [CleverPush getSubscriptionAttribute:attributeId] ?: @"";
+    [call resolve:@{@"value": value}];
+}
+
+- (void)getSubscriptionAttributes:(CAPPluginCall *)call {
+    NSDictionary *attributes = [CleverPush getSubscriptionAttributes] ?: @"";
+    [call resolve:@{@"attributes": attributes}];
+}
+
+- (void)getAvailableAttributes:(CAPPluginCall *)call {
+    [CleverPush getAvailableAttributes:^(NSMutableArray *attributes) {
+        [call resolve:@{@"attributes": attributes}];
+    }];
+}
+
 - (void)isSubscribed:(CAPPluginCall *)call {
     BOOL value = [CleverPush isSubscribed];
     [call resolve:@{@"isSubscribed": @(value)}];
@@ -209,6 +232,10 @@ static NSString * _pendingLaunchOptions;
     CAP_PLUGIN_METHOD(setSubscriptionTopics, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(getAvailableTopics, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(getNotifications, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(setSubscriptionAttribute, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(getSubscriptionAttribute, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(getSubscriptionAttributes, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(getAvailableAttributes, CAPPluginReturnPromise);
     return methods;
 }
 
