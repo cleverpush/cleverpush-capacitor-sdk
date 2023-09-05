@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03FC29A292ACC40490383A1F /* Pods_Plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */; };
 		50ADFF99201F53D600D50D53 /* CleverPushCapacitorPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFF8B201F53D600D50D53 /* CleverPushCapacitorPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50ADFFA42020D75100D50D53 /* Capacitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50ADFFA52020D75100D50D53 /* Capacitor.framework */; };
 		50ADFFA82020EE4F00D50D53 /* CleverPushCapacitorPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFFA72020EE4F00D50D53 /* CleverPushCapacitorPlugin.m */; };
 		692D315C298154B600894FFA /* CleverPush.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692D3158298153F700894FFA /* CleverPush.xcframework */; };
 		692D315D298154B600894FFA /* CleverPush.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 692D3158298153F700894FFA /* CleverPush.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C262B82214CA88535B02F3B6 /* Pods_Plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0DC4A0AB981D72F80C9DCC /* Pods_Plugin.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,18 +30,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ADFF88201F53D600D50D53 /* Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ADFF8B201F53D600D50D53 /* CleverPushCapacitorPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CleverPushCapacitorPlugin.h; sourceTree = "<group>"; };
 		50ADFF8C201F53D600D50D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50ADFFA52020D75100D50D53 /* Capacitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Capacitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ADFFA72020EE4F00D50D53 /* CleverPushCapacitorPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CleverPushCapacitorPlugin.m; sourceTree = "<group>"; };
-		5E23F77F099397094342571A /* Pods-Plugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plugin/Pods-Plugin.debug.xcconfig"; sourceTree = "<group>"; };
+		61BD818DB4CE0FEBA0D1C4EB /* Pods-Plugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.debug.xcconfig"; path = "Target Support Files/Pods-Plugin/Pods-Plugin.debug.xcconfig"; sourceTree = "<group>"; };
 		692D3158298153F700894FFA /* CleverPush.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CleverPush.xcframework; path = Pods/CleverPush.xcframework; sourceTree = "<group>"; };
-		91781294A431A2A7CC6EB714 /* Pods-Plugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Plugin/Pods-Plugin.release.xcconfig"; sourceTree = "<group>"; };
-		96ED1B6440D6672E406C8D19 /* Pods-PluginTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PluginTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PluginTests/Pods-PluginTests.debug.xcconfig"; sourceTree = "<group>"; };
-		F65BB2953ECE002E1EF3E424 /* Pods-PluginTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PluginTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PluginTests/Pods-PluginTests.release.xcconfig"; sourceTree = "<group>"; };
-		F6753A823D3815DB436415E3 /* Pods_PluginTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PluginTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBF4F6134C96D31DF3BB4B49 /* Pods-Plugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.release.xcconfig"; path = "Target Support Files/Pods-Plugin/Pods-Plugin.release.xcconfig"; sourceTree = "<group>"; };
+		FF0DC4A0AB981D72F80C9DCC /* Pods_Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +48,7 @@
 			files = (
 				692D315C298154B600894FFA /* CleverPush.xcframework in Frameworks */,
 				50ADFFA42020D75100D50D53 /* Capacitor.framework in Frameworks */,
-				03FC29A292ACC40490383A1F /* Pods_Plugin.framework in Frameworks */,
+				C262B82214CA88535B02F3B6 /* Pods_Plugin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,8 +60,8 @@
 			children = (
 				50ADFF8A201F53D600D50D53 /* Plugin */,
 				50ADFF89201F53D600D50D53 /* Products */,
-				8C8E7744173064A9F6D438E3 /* Pods */,
 				A797B9EFA3DCEFEA1FBB66A9 /* Frameworks */,
+				D54633432C7C3066516D3C17 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,26 +83,24 @@
 			path = Plugin;
 			sourceTree = "<group>";
 		};
-		8C8E7744173064A9F6D438E3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5E23F77F099397094342571A /* Pods-Plugin.debug.xcconfig */,
-				91781294A431A2A7CC6EB714 /* Pods-Plugin.release.xcconfig */,
-				96ED1B6440D6672E406C8D19 /* Pods-PluginTests.debug.xcconfig */,
-				F65BB2953ECE002E1EF3E424 /* Pods-PluginTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		A797B9EFA3DCEFEA1FBB66A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				692D3158298153F700894FFA /* CleverPush.xcframework */,
 				50ADFFA52020D75100D50D53 /* Capacitor.framework */,
-				3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */,
-				F6753A823D3815DB436415E3 /* Pods_PluginTests.framework */,
+				FF0DC4A0AB981D72F80C9DCC /* Pods_Plugin.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D54633432C7C3066516D3C17 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				61BD818DB4CE0FEBA0D1C4EB /* Pods-Plugin.debug.xcconfig */,
+				DBF4F6134C96D31DF3BB4B49 /* Pods-Plugin.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,13 +121,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50ADFF9C201F53D600D50D53 /* Build configuration list for PBXNativeTarget "Plugin" */;
 			buildPhases = (
-				AB5B3E54B4E897F32C2279DA /* [CP] Check Pods Manifest.lock */,
+				A5AD8D67745A59581081EE47 /* [CP] Check Pods Manifest.lock */,
 				50ADFF83201F53D600D50D53 /* Sources */,
 				50ADFF84201F53D600D50D53 /* Frameworks */,
 				50ADFF85201F53D600D50D53 /* Headers */,
 				50ADFF86201F53D600D50D53 /* Resources */,
 				692D315E298154B600894FFA /* Embed Frameworks */,
-				CF33A8C6ED4F38764158C0A1 /* [CP] Copy Pods Resources */,
+				E4BD3FF8DA49BB183809651D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,16 +184,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AB5B3E54B4E897F32C2279DA /* [CP] Check Pods Manifest.lock */ = {
+		A5AD8D67745A59581081EE47 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Plugin-checkManifestLockResult.txt",
 			);
@@ -207,7 +206,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CF33A8C6ED4F38764158C0A1 /* [CP] Copy Pods Resources */ = {
+		E4BD3FF8DA49BB183809651D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -367,7 +366,7 @@
 		};
 		50ADFF9D201F53D600D50D53 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E23F77F099397094342571A /* Pods-Plugin.debug.xcconfig */;
+			baseConfigurationReference = 61BD818DB4CE0FEBA0D1C4EB /* Pods-Plugin.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -398,7 +397,7 @@
 		};
 		50ADFF9E201F53D600D50D53 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91781294A431A2A7CC6EB714 /* Pods-Plugin.release.xcconfig */;
+			baseConfigurationReference = DBF4F6134C96D31DF3BB4B49 /* Pods-Plugin.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";

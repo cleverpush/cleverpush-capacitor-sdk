@@ -13,6 +13,7 @@
 #import "CPNotificationViewController.h"
 #import "CleverPushHTTPClient.h"
 #import "CPAppBannerAction.h"
+#import "CPAppBanner.h"
 #import "CPNotification.h"
 #import "CPSubscription.h"
 #import "CPChannelTag.h"
@@ -53,6 +54,7 @@ extern NSString * const CLEVERPUSH_SDK_VERSION;
 
 + (void)disableAppBanners;
 + (void)enableAppBanners;
++ (void)setAppBannerTrackingEnabled:(BOOL)enabled;
 + (BOOL)popupVisible;
 + (void)unsubscribe;
 + (void)unsubscribe:(void(^)(BOOL))callback;
@@ -63,34 +65,43 @@ extern NSString * const CLEVERPUSH_SDK_VERSION;
 + (void)handleNotificationReceived:(NSDictionary*)messageDict isActive:(BOOL)isActive;
 + (void)enqueueRequest:(NSURLRequest*)request onSuccess:(CPResultSuccessBlock)successBlock onFailure:(CPFailureBlock)failureBlock;
 + (void)handleJSONNSURLResponse:(NSURLResponse*) response data:(NSData*) data error:(NSError*)error onSuccess:(CPResultSuccessBlock)successBlock onFailure:(CPFailureBlock)failureBlock;
++ (void)addSubscriptionTopic:(NSString*)topicId;
++ (void)addSubscriptionTopic:(NSString*)topicId callback:(void(^)(NSString *))callback;
++ (void)addSubscriptionTopic:(NSString*)topicId callback:(void(^)(NSString *))callback onFailure:(CPFailureBlock)failureBlock;
 + (void)addSubscriptionTags:(NSArray <NSString*>*)tagIds callback:(void(^)(NSArray <NSString*>*))callback;
-+ (void)addSubscriptionTag:(NSString*)tagId callback:(void(^)(NSString *))callback;
-+ (void)addSubscriptionTags:(NSArray <NSString*>*)tagIds;
 + (void)addSubscriptionTag:(NSString*)tagId;
-+ (void)removeSubscriptionTopic:(NSString*)topicId callback:(void(^)(NSString *))callback;
++ (void)addSubscriptionTag:(NSString*)tagId callback:(void(^)(NSString *))callback;
++ (void)addSubscriptionTag:(NSString*)tagId callback:(void(^)(NSString *))callback onFailure:(CPFailureBlock)failureBlock;
++ (void)addSubscriptionTags:(NSArray <NSString*>*)tagIds;
 + (void)removeSubscriptionTopic:(NSString*)topicId;
++ (void)removeSubscriptionTopic:(NSString*)topicId callback:(void(^)(NSString *))callback;
++ (void)removeSubscriptionTopic:(NSString*)topicId callback:(void(^)(NSString *))callback onFailure:(CPFailureBlock)failureBlock;
 + (void)removeSubscriptionTags:(NSArray <NSString*>*)tagIds callback:(void(^)(NSArray <NSString*>*))callback;
-+ (void)removeSubscriptionTag:(NSString*)tagId callback:(void(^)(NSString *))callback;
-+ (void)removeSubscriptionTags:(NSArray <NSString*>*)tagIds;
 + (void)removeSubscriptionTag:(NSString*)tagId;
++ (void)removeSubscriptionTag:(NSString*)tagId callback:(void(^)(NSString *))callback;
++ (void)removeSubscriptionTag:(NSString*)tagId callback:(void(^)(NSString *))callback onFailure:(CPFailureBlock)failureBlock;
++ (void)removeSubscriptionTags:(NSArray <NSString*>*)tagIds;
 + (void)setSubscriptionAttribute:(NSString*)attributeId value:(NSString*)value;
++ (void)setSubscriptionAttribute:(NSString*)attributeId value:(NSString*)value callback:(void(^)())callback;
 + (void)pushSubscriptionAttributeValue:(NSString*)attributeId value:(NSString*)value;
 + (void)pullSubscriptionAttributeValue:(NSString*)attributeId value:(NSString*)value;
 + (BOOL)hasSubscriptionAttributeValue:(NSString*)attributeId value:(NSString*)value;
++ (void)startLiveActivity:(NSString*)activityId pushToken:(NSString*)token;
++ (void)startLiveActivity:(NSString*)activityId pushToken:(NSString*)token onSuccess:(CPResultSuccessBlock)successBlock onFailure:(CPFailureBlock)failureBlock;
 + (void)getAvailableTags:(void(^)(NSArray <CPChannelTag*>*))callback;
 + (void)getAvailableTopics:(void(^)(NSArray <CPChannelTopic*>*))callback;
-+ (void)getAvailableAttributes:(void(^)(NSDictionary *))callback;
++ (void)getAvailableAttributes:(void(^)(NSMutableArray *))callback;
 + (void)setSubscriptionLanguage:(NSString*)language;
 + (void)setSubscriptionCountry:(NSString*)country;
 + (void)setTopicsDialogWindow:(UIWindow *)window;
-+ (void)addSubscriptionTopic:(NSString*)topicId callback:(void(^)(NSString *))callback;
-+ (void)addSubscriptionTopic:(NSString*)topicId;
++ (void)setTopicsChangedListener:(CPTopicsChangedBlock)changedBlock;
 + (void)setSubscriptionTopics:(NSMutableArray *)topics;
 + (void)setBrandingColor:(UIColor *)color;
 + (void)setNormalTintColor:(UIColor *)color;
 + (UIColor*)getNormalTintColor;
-+ (void)setChatBackgroundColor:(UIColor *)color;
 + (void)setAutoClearBadge:(BOOL)autoClear;
++ (void)setAppBannerDraftsEnabled:(BOOL)showDraft;
++ (void)setSubscriptionChanged:(BOOL)subscriptionChanged;
 + (void)setIncrementBadge:(BOOL)increment;
 + (void)setShowNotificationsInForeground:(BOOL)show;
 + (void)setIgnoreDisabledNotificationPermission:(BOOL)ignore;
@@ -105,6 +116,7 @@ extern NSString * const CLEVERPUSH_SDK_VERSION;
 + (void)getDeviceToken:(void(^)(NSString *))callback;
 + (void)trackEvent:(NSString*)eventName;
 + (void)trackEvent:(NSString*)eventName amount:(NSNumber*)amount;
++ (void)trackEvent:(NSString*)eventName properties:(NSDictionary*)properties;
 + (void)triggerFollowUpEvent:(NSString*)eventName;
 + (void)triggerFollowUpEvent:(NSString*)eventName parameters:(NSDictionary*)parameters;
 + (void)trackPageView:(NSString*)url;
@@ -112,9 +124,11 @@ extern NSString * const CLEVERPUSH_SDK_VERSION;
 + (void)increaseSessionVisits;
 + (void)showAppBanner:(NSString*)bannerId;
 + (void)setAppBannerOpenedCallback:(CPAppBannerActionBlock)callback;
-+ (void)getAppBanners:(NSString*)channelId callback:(void(^)(NSArray <CPAppBanner*>*))callback;
-+ (void)triggerAppBannerEvent:(NSString *)key value:(NSString *)value;
++ (void)setAppBannerShownCallback:(CPAppBannerShownBlock)callback;
++ (void)getAppBanners:(NSString*)channelId callback:(void(^)(NSMutableArray <CPAppBanner*>*))callback;
++ (void)getAppBannersByGroup:(NSString*)groupId callback:(void(^)(NSMutableArray <CPAppBanner*>*))callback;
 + (void)setApiEndpoint:(NSString*)apiEndpoint;
++ (void)setAuthorizerToken:(NSString*)authorizerToken;
 + (void)updateBadge:(UNMutableNotificationContent*)replacementContent API_AVAILABLE(ios(10.0));
 + (void)addStoryView:(CPStoryView*)storyView;
 + (void)updateDeselectFlag:(BOOL)value;
@@ -141,18 +155,20 @@ extern NSString * const CLEVERPUSH_SDK_VERSION;
 + (NSString*)channelId;
 
 + (UIColor*)getBrandingColor;
-+ (UIColor*)getChatBackgroundColor;
 
-+ (NSDictionary*)getAvailableAttributes __attribute__((deprecated));
++ (NSMutableArray*)getAvailableAttributes __attribute__((deprecated));
 + (NSDictionary*)getSubscriptionAttributes;
 
 + (BOOL)isDevelopmentModeEnabled;
++ (BOOL)getAppBannerDraftsEnabled;
++ (BOOL)getSubscriptionChanged;
 + (BOOL)isSubscribed;
 + (BOOL)handleSilentNotificationReceived:(UIApplication*)application UserInfo:(NSDictionary*)messageDict completionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 + (BOOL)hasSubscriptionTag:(NSString*)tagId;
 + (BOOL)getDeselectValue;
 + (BOOL)getUnsubscribeStatus;
 + (void)setConfirmAlertShown;
++ (void)areNotificationsEnabled:(void(^)(BOOL))callback;
 
 + (void)setLogListener:(CPLogListener)listener;
 

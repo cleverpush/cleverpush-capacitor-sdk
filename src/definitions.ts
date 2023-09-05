@@ -20,6 +20,11 @@ export interface CleverPushCapacitorPlugin {
   getAvailableTopics(): Promise<{ topics: { _id: string; name: string; }[] }>;
   setAuthorizerToken(options: { token: string }): void;
   getNotifications(): Promise<{ notifications: any[] }>;
+  setSubscriptionAttribute(options: { attributeId: string, value?: string }): void;
+  getSubscriptionAttribute(options: { attributeId: string}): Promise<{ value: string }>;
+  getSubscriptionAttributes(): Promise<{ attributes: { attributeId: string; value: string; }[] }>;
+  getAvailableAttributes(): Promise<{ attributes: { attributeId: string; value: string; }[] }>;
+
   addListener(
     eventName: 'notificationReceived',
     listenerFunc: (data: { notification?: any }) => void,

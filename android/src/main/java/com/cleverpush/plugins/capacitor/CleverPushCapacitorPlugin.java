@@ -263,4 +263,39 @@ public class CleverPushCapacitorPlugin extends Plugin {
         result.put("notifications", notificationsArray);
         call.resolve(result);
     }
+
+     @PluginMethod
+    public void getAvailableAttributes(PluginCall call) {
+        CleverPush.getInstance(this.getActivity()).getAvailableAttributes(attributes -> {
+            Set<CustomAttribute> customAttributes = attributes;
+            JSObject obj = new JSObject();
+            obj.put("attributes", customAttributes);
+            call.resolve(obj);
+        });
+    }
+
+    @PluginMethod
+    public void setSubscriptionAttribute(PluginCall call) {
+        String attributeId = call.getString("attributeId");
+        String value = call.getString("value");
+        CleverPush.getInstance(this.getActivity()).setSubscriptionAttribute(attributeId,value);
+    }
+
+    @PluginMethod
+    public void getSubscriptionAttribute(PluginCall call) {
+        String attributeId = call.getString("attributeId");
+        Object value = CleverPush.getInstance(this.getActivity()).getSubscriptionAttribute(attributeId);
+        JSObject obj = new JSObject();
+        obj.put("value", value);
+        call.resolve(obj);
+    }
+
+      @PluginMethod
+    public void getSubscriptionAttributes(PluginCall call) {
+        Map<String, Object> attributes = CleverPush.getInstance(this.getActivity()).getSubscriptionAttributes();
+        JSObject obj = new JSObject();
+        obj.put("attributes", attributes);
+        call.resolve(obj);
+    }
+
 }
