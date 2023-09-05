@@ -1,3 +1,6 @@
+## 1.3.4
+* Added attribute methods
+
 ## 1.3.3
 * Hotfix for Capacitor 5 on iOS
 
