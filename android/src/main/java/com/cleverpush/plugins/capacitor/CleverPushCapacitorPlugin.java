@@ -2,6 +2,7 @@ package com.cleverpush.plugins.capacitor;
 
 import com.cleverpush.ChannelTopic;
 import com.cleverpush.CleverPush;
+import com.cleverpush.CustomAttribute;
 import com.cleverpush.Notification;
 import com.cleverpush.listener.NotificationOpenedListener;
 import com.cleverpush.listener.NotificationReceivedListener;
