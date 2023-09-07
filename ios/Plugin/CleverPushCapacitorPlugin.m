@@ -14,14 +14,13 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
         NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
         if ([obj valueForKey:key] != nil) {
             if ([[obj valueForKey:key] isKindOfClass:[NSDate class]]) {
-                NSDateFormatter *inputDateFormatter = [[NSDateFormatter alloc] init];
-                [inputDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
-                NSDate *inputDate = [inputDateFormatter dateFromString:[NSString stringWithFormat:@"%@", [obj valueForKey:key]]];
-                NSDateFormatter *outputDateFormatter = [[NSDateFormatter alloc] init];
-                [outputDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-                [outputDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-                NSString *outputDateString = [outputDateFormatter stringFromDate:inputDate];
-                [dict setObject:outputDateString forKey:key];
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+                NSDate *createdAtDate = [dateFormatter dateFromString:[NSString stringWithFormat:@"%@", [obj valueForKey:key]]];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+                [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+                NSString *createdAt = [dateFormatter stringFromDate:createdAtDate];
+                [dict setObject:createdAt forKey:key];
             } else {
                 [dict setObject:[obj valueForKey:key] forKey:key];
             }
