@@ -1,5 +1,6 @@
 package com.cleverpush.plugins.capacitor;
 
+import android.os.Build;
 import com.cleverpush.ChannelTopic;
 import com.cleverpush.CleverPush;
 import com.cleverpush.CustomAttribute;
@@ -15,10 +16,13 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.google.gson.Gson;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import org.json.JSONException;
@@ -27,6 +31,27 @@ import org.json.JSONException;
 public class CleverPushCapacitorPlugin extends Plugin {
     private JSObject coldStartOpenObject = null;
 
+    private JSObject getNotificationJSObject(JSObject notification) {
+        String createdAtString = notification.getString("createdAt");
+        if (createdAtString != null) {
+            Date createdAtDate = null;
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    createdAtDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.US).parse(createdAtString);
+                } else {
+                    createdAtDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US).parse(createdAtString);
+                }
+            } catch (Exception ignored) {
+
+            }
+            if (createdAtDate != null) {
+                String newCreatedAtString = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US).format(createdAtDate);
+                notification.put("createdAt", newCreatedAtString);
+            }
+        }
+        return notification;
+    }
+
     @PluginMethod
     public void init(PluginCall call) {
         CleverPush.getInstance(this.getActivity()).init(call.getString("channelId"),
@@ -34,7 +59,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
                     Gson gson = new Gson();
                     JSObject obj = new JSObject();
                     try {
-                        obj.put("notification", new JSObject(gson.toJson(result.getNotification())));
+                        obj.put("notification", this.getNotificationJSObject(new JSObject(gson.toJson(result.getNotification()))));
                         obj.put("subscription", new JSObject(gson.toJson(result.getSubscription())));
                         notifyListeners("notificationReceived", obj);
                     } catch (Exception ex) {
@@ -45,7 +70,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
                     Gson gson = new Gson();
                     JSObject obj = new JSObject();
                     try {
-                        obj.put("notification", new JSObject(gson.toJson(result.getNotification())));
+                        obj.put("notification", this.getNotificationJSObject(new JSObject(gson.toJson(result.getNotification()))));
                         obj.put("subscription", new JSObject(gson.toJson(result.getSubscription())));
                         if (hasListeners("notificationOpened")) {
                             notifyListeners("notificationOpened", obj);
@@ -254,7 +279,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
         JSArray notificationsArray = new JSArray();
         for (Notification notification : notifications) {
             try {
-                JSObject notificationObj = new JSObject(gson.toJson(notification));
+                JSObject notificationObj = this.getNotificationJSObject(new JSObject(gson.toJson(notification)));
                 notificationsArray.put(notificationObj);
             } catch (Exception ex) {
                 System.out.println("Exception while getting notifications: " + ex.getMessage());

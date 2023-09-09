@@ -1,3 +1,7 @@
+## 1.3.5
+* Renamed `id` field to `_id` for Notifications in iOS
+* Consistent date formats for `createdAt` field (ISO 8601)
+
 ## 1.3.4
 * Added attribute methods
 

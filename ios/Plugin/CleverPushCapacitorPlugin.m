@@ -14,8 +14,17 @@ NSDictionary* dictionaryWithPropertiesOfObject(id obj) {
         NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
         if ([obj valueForKey:key] != nil) {
             if ([[obj valueForKey:key] isKindOfClass:[NSDate class]]) {
-                NSString *convertedDateString = [NSString stringWithFormat:@"%@", [obj valueForKey:key]];
-                [dict setObject:convertedDateString forKey:key];
+                NSDate *createdAtDate = (NSDate*) obj;
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+                [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+                NSString *convertedDateString = [dateFormatter stringFromDate:createdAtDate];
+
+                if (convertedDateString != nil) {
+                    [dict setObject:convertedDateString forKey:key];
+                } else {
+                    [dict setObject:[obj valueForKey:key] forKey:key];
+                }
             } else {
                 [dict setObject:[obj valueForKey:key] forKey:key];
             }
@@ -39,7 +48,7 @@ static NSString * _pendingLaunchOptions;
                 NSDictionary *subscriptionDictionary = dictionaryWithPropertiesOfObject(result.subscription);
 
                 NSMutableDictionary *obj = [NSMutableDictionary dictionary];
-                [obj setObject:notificationDictionary forKey:@"notification"];
+                [obj setObject:[self getNotificationDictionary:notificationDictionary] forKey:@"notification"];
                 [obj setObject:subscriptionDictionary forKey:@"subscription"];
 
                 [self notifyListeners:@"notificationReceived" data:obj];
@@ -50,7 +59,7 @@ static NSString * _pendingLaunchOptions;
                 NSDictionary *subscriptionDictionary = dictionaryWithPropertiesOfObject(result.subscription);
 
                 NSMutableDictionary *obj = [NSMutableDictionary dictionary];
-                [obj setObject:notificationDictionary forKey:@"notification"];
+                [obj setObject:[self getNotificationDictionary:notificationDictionary] forKey:@"notification"];
                 [obj setObject:subscriptionDictionary forKey:@"subscription"];
                 if (result.action != nil) {
                     [obj setObject:result.action forKey:@"action"];
@@ -157,19 +166,23 @@ static NSString * _pendingLaunchOptions;
 }
 
 - (void)unsubscribe:(CAPPluginCall *)call {
-    [CleverPush unsubscribe];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [CleverPush unsubscribe];
+    });
 }
 
 - (void)subscribe:(CAPPluginCall *)call {
-    [CleverPush subscribe:^(NSString *subscriptionId) {
-        if (self.pluginCallDelegate != nil && call.callbackId != nil) {
-            [call resolve:@{@"subscriptionId": subscriptionId}];
-        }
-    } failure:^(NSError *error) {
-        if (self.pluginCallDelegate != nil && call.callbackId != nil) {
-            [call reject:error.localizedDescription ?: @"" :nil :nil :nil];
-        }
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [CleverPush subscribe:^(NSString *subscriptionId) {
+            if (self.pluginCallDelegate != nil && call.callbackId != nil) {
+                [call resolve:@{@"subscriptionId": subscriptionId}];
+            }
+        } failure:^(NSError *error) {
+            if (self.pluginCallDelegate != nil && call.callbackId != nil) {
+                [call reject:error.localizedDescription ?: @"" :nil :nil :nil];
+            }
+        }];
+    });
 }
 
 - (void)showTopicsDialog:(CAPPluginCall *)call {
@@ -187,11 +200,21 @@ static NSString * _pendingLaunchOptions;
     [CleverPush setAuthorizerToken:token];
 }
 
+- (NSDictionary*)getNotificationDictionary:(NSDictionary*)notificationDictionary {
+    NSMutableDictionary *mutableNotificationDictionary = [notificationDictionary mutableCopy];
+    // rename `id` to `_id`
+    [mutableNotificationDictionary setObject:[mutableNotificationDictionary objectForKey:@"id"] forKey:@"_id"];
+    [mutableNotificationDictionary removeObjectForKey:@"id"];
+
+    return mutableNotificationDictionary;
+}
+
 - (void)getNotifications:(CAPPluginCall *)call {
     NSArray *notifications = [CleverPush getNotifications];
     NSMutableArray *notificationsArray = [NSMutableArray array];
     for (CPNotification *notification in notifications) {
-        [notificationsArray addObject:dictionaryWithPropertiesOfObject(notification)];
+        NSDictionary *notificationDictionary = dictionaryWithPropertiesOfObject(notification);
+        [notificationsArray addObject:[self getNotificationDictionary:notificationDictionary]];
     }
     [call resolve:@{@"notifications": notificationsArray}];
 }
