@@ -1,3 +1,6 @@
+## 1.3.7
+* Added `setShowNotificationsInForeground` method
+
 ## 1.3.6
 * Fixed timezone for `createdAt` fields on Android
 
