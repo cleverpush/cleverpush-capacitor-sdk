@@ -1,10 +1,12 @@
 package com.cleverpush.plugins.capacitor;
 
 import android.os.Build;
+import android.util.Log;
 import com.cleverpush.ChannelTopic;
 import com.cleverpush.CleverPush;
 import com.cleverpush.CustomAttribute;
 import com.cleverpush.Notification;
+import com.cleverpush.listener.NotificationReceivedCallbackListener;
 import com.cleverpush.listener.NotificationOpenedListener;
 import com.cleverpush.listener.NotificationReceivedListener;
 import com.cleverpush.listener.SubscribedCallbackListener;
@@ -30,6 +32,7 @@ import org.json.JSONException;
 @CapacitorPlugin(name = "CleverPush")
 public class CleverPushCapacitorPlugin extends Plugin {
     private JSObject coldStartOpenObject = null;
+    private boolean showNotificationsInForeground = true;
 
     private JSObject getNotificationJSObject(JSObject notification) {
         String createdAtString = notification.getString("createdAt");
@@ -54,18 +57,39 @@ public class CleverPushCapacitorPlugin extends Plugin {
 
     @PluginMethod
     public void init(PluginCall call) {
-        CleverPush.getInstance(this.getActivity()).init(call.getString("channelId"),
-                (NotificationReceivedListener) result -> {
-                    Gson gson = new Gson();
-                    JSObject obj = new JSObject();
+
+        NotificationReceivedCallbackListener receivedListener = new NotificationReceivedCallbackListener() {
+            @Override
+            public boolean notificationReceivedCallback(NotificationOpenedResult result) {
+                boolean appIsOpen = CleverPush.getInstance(bridge.getActivity()).isAppOpen();
+               
+                if (appIsOpen) {
                     try {
-                        obj.put("notification", this.getNotificationJSObject(new JSObject(gson.toJson(result.getNotification()))));
-                        obj.put("subscription", new JSObject(gson.toJson(result.getSubscription())));
-                        notifyListeners("notificationReceived", obj);
-                    } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
+                        Gson gson = new Gson();
+                        JSObject obj = new JSObject();
+                        try {
+                            obj.put("notification", getNotificationJSObject(new JSObject(gson.toJson(result.getNotification()))));
+                            obj.put("subscription", new JSObject(gson.toJson(result.getSubscription())));
+                            notifyListeners("notificationReceived", obj);
+                        } catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e("CleverPush", "Encountered an error attempting to convert CPNotification object to map: " + e.getMessage());
                     }
-                },
+                }
+
+                if (showNotificationsInForeground) {
+                    return true;
+                }
+
+                return !appIsOpen;
+            }
+        };
+
+        CleverPush.getInstance(this.getActivity()).init(call.getString("channelId"),
+                receivedListener ,
                 (NotificationOpenedListener) result -> {
                     Gson gson = new Gson();
                     JSObject obj = new JSObject();
@@ -322,6 +346,15 @@ public class CleverPushCapacitorPlugin extends Plugin {
         JSObject obj = new JSObject();
         obj.put("attributes", attributes);
         call.resolve(obj);
+    }
+
+    @PluginMethod
+    public void setShowNotificationsInForeground(PluginCall call) {
+        boolean value = call.getBoolean("showNotifications");
+        showNotificationsInForeground = value;
+        /*JSObject obj = new JSObject();
+        obj.put("showNotifications", value);
+        call.resolve(obj);*/
     }
 
 }

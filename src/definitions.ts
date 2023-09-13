@@ -24,6 +24,7 @@ export interface CleverPushCapacitorPlugin {
   getSubscriptionAttribute(options: { attributeId: string}): Promise<{ value: string }>;
   getSubscriptionAttributes(): Promise<{ attributes: { attributeId: string; value: string; }[] }>;
   getAvailableAttributes(): Promise<{ attributes: { attributeId: string; value: string; }[] }>;
+  setShowNotificationsInForeground(options: { showNotifications: boolean }): void;
 
   addListener(
     eventName: 'notificationReceived',

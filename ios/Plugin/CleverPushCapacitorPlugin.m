@@ -68,6 +68,8 @@ static NSString * _pendingLaunchOptions;
                 [self notifyListeners:@"notificationOpened" data:obj];
             }
         } handleSubscribed:^(NSString *subscriptionId) {
+            UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+            center.delegate = self;
             [self notifyListeners:@"subscribed" data:@{@"subscriptionId": subscriptionId}];
         } autoRegister:autoRegister];
 
@@ -200,6 +202,11 @@ static NSString * _pendingLaunchOptions;
     [CleverPush setAuthorizerToken:token];
 }
 
+- (void)setShowNotificationsInForeground:(CAPPluginCall *)call {
+    BOOL show = [call.options objectForKey:@"showNotifications"] ? [[call.options objectForKey:@"showNotifications"] boolValue] : YES;
+    [CleverPush setShowNotificationsInForeground:show];
+}
+
 - (NSDictionary*)getNotificationDictionary:(NSDictionary*)notificationDictionary {
     NSMutableDictionary *mutableNotificationDictionary = [notificationDictionary mutableCopy];
     // rename `id` to `_id`
@@ -221,7 +228,7 @@ static NSString * _pendingLaunchOptions;
 
 - (void)init:(CAPPluginCall *)call {
     self.pluginCallDelegate = call;
-
+    
     NSString *channelId = [call.options objectForKey:@"channelId"] ?: @"";
     BOOL autoRegister = [call.options objectForKey:@"autoRegister"] != nil ? [[call.options objectForKey:@"autoRegister"] boolValue] : YES;
     [self initCleverPushObjectWithLaunchOptions:CleverPushCapacitorPlugin.pendingLaunchOptions channelId:channelId autoRegister:autoRegister];
@@ -259,6 +266,7 @@ static NSString * _pendingLaunchOptions;
     CAP_PLUGIN_METHOD(getSubscriptionAttribute, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(getSubscriptionAttributes, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(getAvailableAttributes, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(setShowNotificationsInForeground, CAPPluginReturnPromise);
     return methods;
 }
 
