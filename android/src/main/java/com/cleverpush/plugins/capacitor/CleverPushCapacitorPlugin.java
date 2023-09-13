@@ -26,6 +26,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import org.json.JSONException;
+import java.util.TimeZone;
 
 @CapacitorPlugin(name = "CleverPush")
 public class CleverPushCapacitorPlugin extends Plugin {
@@ -41,12 +42,18 @@ public class CleverPushCapacitorPlugin extends Plugin {
                 } else {
                     createdAtDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US).parse(createdAtString);
                 }
-            } catch (Exception ignored) {
-
+            } catch (Exception ex) {
+                System.out.println(ex.getLocalizedMessage());
             }
-            if (createdAtDate != null) {
-                String newCreatedAtString = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US).format(createdAtDate);
-                notification.put("createdAt", newCreatedAtString);
+            try {
+                if (createdAtDate != null) {
+                    SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+                    outputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    String newCreatedAtString = outputFormat.format(createdAtDate);
+                    notification.put("createdAt", newCreatedAtString);
+                }
+            } catch (Exception ex) {
+                System.out.println(ex.getLocalizedMessage());
             }
         }
         return notification;
