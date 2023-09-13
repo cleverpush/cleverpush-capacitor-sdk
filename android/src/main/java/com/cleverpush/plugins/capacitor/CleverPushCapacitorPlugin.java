@@ -6,6 +6,7 @@ import com.cleverpush.ChannelTopic;
 import com.cleverpush.CleverPush;
 import com.cleverpush.CustomAttribute;
 import com.cleverpush.Notification;
+import com.cleverpush.NotificationOpenedResult;
 import com.cleverpush.listener.NotificationReceivedCallbackListener;
 import com.cleverpush.listener.NotificationOpenedListener;
 import com.cleverpush.listener.NotificationReceivedListener;
@@ -352,9 +353,5 @@ public class CleverPushCapacitorPlugin extends Plugin {
     public void setShowNotificationsInForeground(PluginCall call) {
         boolean value = call.getBoolean("showNotifications");
         showNotificationsInForeground = value;
-        /*JSObject obj = new JSObject();
-        obj.put("showNotifications", value);
-        call.resolve(obj);*/
     }
-
 }
