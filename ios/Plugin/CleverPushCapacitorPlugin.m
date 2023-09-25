@@ -89,27 +89,47 @@ static NSString * _pendingLaunchOptions;
 
 - (void)trackPageView:(CAPPluginCall *)call {
     NSString *url = [call.options objectForKey:@"url"] ?: @"";
-    [CleverPush trackPageView:url];
+    if (url != nil) {
+        [CleverPush trackPageView:url];
+        [call resolve];
+    } else {
+        [call reject:@"Invalid URL parameter" :nil :nil :nil];
+    }
 }
 
 - (void)trackEvent:(CAPPluginCall *)call {
     NSString *eventName = [call.options objectForKey:@"eventName"] ?: @"";
     NSDictionary *properties = [call.options objectForKey:@"properties"] ?: @"";
-    if (properties != nil) {
-        [CleverPush trackEvent:eventName properties:properties];
+    if (eventName != nil) {
+        if (properties != nil) {
+            [CleverPush trackEvent:eventName properties:properties];
+        } else {
+            [CleverPush trackEvent:eventName];
+        }
+        [call resolve];
     } else {
-        [CleverPush trackEvent:eventName];
+        [call reject:@"Invalid eventName parameter" :nil :nil :nil];
     }
 }
 
 - (void)addSubscriptionTag:(CAPPluginCall *)call {
     NSString *tagId = [call.options objectForKey:@"tagId"] ?: @"";
-    [CleverPush addSubscriptionTag:tagId];
+    if (tagId != nil) {
+        [CleverPush addSubscriptionTag:tagId];
+        [call resolve];
+    } else {
+        [call reject:@"Invalid tagId parameter" :nil :nil :nil];
+    }
 }
 
 - (void)removeSubscriptionTag:(CAPPluginCall *)call {
     NSString *tagId = [call.options objectForKey:@"tagId"] ?: @"";
-    [CleverPush removeSubscriptionTag:tagId];
+    if (tagId != nil) {
+        [CleverPush removeSubscriptionTag:tagId];
+        [call resolve];
+    } else {
+        [call reject:@"Invalid tagId parameter" :nil :nil :nil];
+    }
 }
 
 - (void)hasSubscriptionTag:(CAPPluginCall *)call {
@@ -130,7 +150,12 @@ static NSString * _pendingLaunchOptions;
 
 - (void)setSubscriptionTopics:(CAPPluginCall *)call {
     NSMutableArray *topics = [[call.options valueForKey:@"topics"] mutableCopy];
-    [CleverPush setSubscriptionTopics:topics];
+    if (topics != nil) {
+        [CleverPush setSubscriptionTopics:topics];
+        [call resolve];
+    } else {
+        [call reject:@"Invalid topics parameter" :nil :nil :nil];
+    }
 }
 
 - (void)getAvailableTopics:(CAPPluginCall *)call {
@@ -142,7 +167,12 @@ static NSString * _pendingLaunchOptions;
 - (void)setSubscriptionAttribute:(CAPPluginCall *)call {
     NSString *attributeId = [call.options objectForKey:@"attributeId"] ?: @"";
     NSString *value = [call.options objectForKey:@"value"] ?: @"";
-    [CleverPush setSubscriptionAttribute:attributeId value:value];
+    if (attributeId != nil && value != nil) {
+        [CleverPush setSubscriptionAttribute:attributeId value:value];
+        [call resolve];
+    } else {
+        [call reject:@"Invalid attributeId or value parameter" :nil :nil :nil];
+    }
 }
 
 - (void)getSubscriptionAttribute:(CAPPluginCall *)call {
@@ -169,7 +199,13 @@ static NSString * _pendingLaunchOptions;
 
 - (void)unsubscribe:(CAPPluginCall *)call {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [CleverPush unsubscribe];
+        [CleverPush unsubscribe:^(BOOL issubscribe) {
+            if (issubscribe) {
+                [call resolve];
+            } else {
+                [call reject:@"Unsubscribe failed" :nil :nil :nil];
+            }
+        }];
     });
 }
 
@@ -199,12 +235,18 @@ static NSString * _pendingLaunchOptions;
 
 - (void)setAuthorizerToken:(CAPPluginCall *)call {
     NSString *token = [call.options objectForKey:@"token"] ?: @"";
-    [CleverPush setAuthorizerToken:token];
+    if (token != nil) {
+        [CleverPush setAuthorizerToken:token];
+        [call resolve];
+    } else {
+        [call reject:@"Invalid token parameter" :nil :nil :nil];
+    }
 }
 
 - (void)setShowNotificationsInForeground:(CAPPluginCall *)call {
     BOOL show = [call.options objectForKey:@"showNotifications"] ? [[call.options objectForKey:@"showNotifications"] boolValue] : YES;
     [CleverPush setShowNotificationsInForeground:show];
+    [call resolve];
 }
 
 - (NSDictionary*)getNotificationDictionary:(NSDictionary*)notificationDictionary {
@@ -246,12 +288,12 @@ static NSString * _pendingLaunchOptions;
     NSMutableArray *methods = [NSMutableArray new];
     CAP_PLUGIN_METHOD(getSubscriptionId, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(isSubscribed, CAPPluginReturnPromise);
-    CAP_PLUGIN_METHOD(unsubscribe, CAPPluginReturnNone);
-    CAP_PLUGIN_METHOD(subscribe, CAPPluginReturnNone);
-    CAP_PLUGIN_METHOD(enableDevelopmentMode, CAPPluginReturnNone);
-    CAP_PLUGIN_METHOD(setAuthorizerToken, CAPPluginReturnNone);
-    CAP_PLUGIN_METHOD(init, CAPPluginReturnNone);
-    CAP_PLUGIN_METHOD(showTopicsDialog, CAPPluginReturnNone);
+    CAP_PLUGIN_METHOD(unsubscribe, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(subscribe, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(enableDevelopmentMode, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(setAuthorizerToken, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(init, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(showTopicsDialog, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(trackPageView, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(trackEvent, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(addSubscriptionTag, CAPPluginReturnPromise);
