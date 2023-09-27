@@ -1,3 +1,6 @@
+## 1.3.8
+* Optimized `setAuthorizerToken` method
+
 ## 1.3.7
 * Added `setShowNotificationsInForeground` method
 
