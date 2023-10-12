@@ -352,7 +352,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
         call.resolve(result);
     }
 
-     @PluginMethod
+    @PluginMethod
     public void getAvailableAttributes(PluginCall call) {
         CleverPush.getInstance(this.getActivity()).getAvailableAttributes(attributes -> {
             Set<CustomAttribute> customAttributes = attributes;
@@ -383,7 +383,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
         call.resolve(obj);
     }
 
-      @PluginMethod
+    @PluginMethod
     public void getSubscriptionAttributes(PluginCall call) {
         Map<String, Object> attributes = CleverPush.getInstance(this.getActivity()).getSubscriptionAttributes();
         JSObject obj = new JSObject();
