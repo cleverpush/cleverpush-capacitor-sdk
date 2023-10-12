@@ -171,9 +171,9 @@ public class CleverPushCapacitorPlugin extends Plugin {
 
     @PluginMethod
     public void trackPageView(PluginCall call) {
-        String url = call.getString("url");
-        if (url != null && !url.isEmpty()) {
-            CleverPush.trackPageView(url);
+        String value = call.getString("url");
+        if (value != null && !value.isEmpty()) {
+            CleverPush.trackPageView(value);
             call.resolve(new JSObject().put("message", "The trackpageview value was successfully set."));
         } else {
             call.reject("Invalid URL parameter");
