@@ -226,11 +226,13 @@ static NSString * _pendingLaunchOptions;
 - (void)showTopicsDialog:(CAPPluginCall *)call {
     dispatch_async(dispatch_get_main_queue(), ^{
         [CleverPush showTopicsDialog];
+        [call resolve:@{@"message": @"showTopicsDialog function was successfully executed."}];
     });
 }
 
 - (void)enableDevelopmentMode:(CAPPluginCall *)call {
     [CleverPush enableDevelopmentMode];
+    [call resolve:@{@"message": @"Cleverpush SDK development mode is enabled."}];
 }
 
 - (void)setAuthorizerToken:(CAPPluginCall *)call {
