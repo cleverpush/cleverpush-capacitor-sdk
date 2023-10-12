@@ -91,7 +91,7 @@ static NSString * _pendingLaunchOptions;
     NSString *url = [call.options objectForKey:@"url"] ?: @"";
     if (url != nil) {
         [CleverPush trackPageView:url];
-        [call resolve:@{@"message": @"Track page view value was successfully set."}];
+        [call resolve:@{@"message": @"The trackpageview value was successfully set."}];
     } else {
         [call reject:@"Invalid URL parameter" :nil :nil :nil];
     }
@@ -106,7 +106,7 @@ static NSString * _pendingLaunchOptions;
         } else {
             [CleverPush trackEvent:eventName];
         }
-        [call resolve:@{@"message": @"Track event value was successfully set."}];
+        [call resolve:@{@"message": @"The trackevent value was successfully set."}];
     } else {
         [call reject:@"Invalid eventName parameter" :nil :nil :nil];
     }
@@ -116,7 +116,7 @@ static NSString * _pendingLaunchOptions;
     NSString *tagId = [call.options objectForKey:@"tagId"] ?: @"";
     if (tagId != nil) {
         [CleverPush addSubscriptionTag:tagId];
-        [call resolve:@{@"message": @"Add subscription tag value was successfully set."}];
+        [call resolve:@{@"message": @"The addSubscription tag value was successfully added."}];
     } else {
         [call reject:@"Invalid tagId parameter" :nil :nil :nil];
     }
@@ -126,7 +126,7 @@ static NSString * _pendingLaunchOptions;
     NSString *tagId = [call.options objectForKey:@"tagId"] ?: @"";
     if (tagId != nil) {
         [CleverPush removeSubscriptionTag:tagId];
-        [call resolve:@{@"message": @"Remove subscription tag value was successfully set."}];
+        [call resolve:@{@"message": @"The removeSubscription tag value was successfully removed. set."}];
     } else {
         [call reject:@"Invalid tagId parameter" :nil :nil :nil];
     }
@@ -152,7 +152,7 @@ static NSString * _pendingLaunchOptions;
     NSMutableArray *topics = [[call.options valueForKey:@"topics"] mutableCopy];
     if (topics != nil) {
         [CleverPush setSubscriptionTopics:topics];
-        [call resolve:@{@"message": @"setSubscriptionTopics value was successfully set."}];
+        [call resolve:@{@"message": @"The setSubscriptionTopics value was successfully set."}];
     } else {
         [call reject:@"Invalid topics parameter" :nil :nil :nil];
     }
@@ -169,7 +169,7 @@ static NSString * _pendingLaunchOptions;
     NSString *value = [call.options objectForKey:@"value"] ?: @"";
     if (attributeId != nil && value != nil) {
         [CleverPush setSubscriptionAttribute:attributeId value:value];
-        [call resolve:@{@"message": @"Attribute set successfully"}];
+        [call resolve:@{@"message": @"The setSubscriptionAttribute value was set successfully."}];
     } else {
         [call reject:@"Invalid attributeId or value parameter" :nil :nil :nil];
     }
@@ -226,7 +226,7 @@ static NSString * _pendingLaunchOptions;
 - (void)showTopicsDialog:(CAPPluginCall *)call {
     dispatch_async(dispatch_get_main_queue(), ^{
         [CleverPush showTopicsDialog];
-        [call resolve:@{@"message": @"showTopicsDialog function was successfully executed."}];
+        [call resolve:@{@"message": @"The showTopicsDialog The showTopicsDialog function was successfully executed."}];
     });
 }
 
@@ -239,7 +239,7 @@ static NSString * _pendingLaunchOptions;
     NSString *token = [call.options objectForKey:@"token"] ?: @"";
     if (token != nil) {
         [CleverPush setAuthorizerToken:token];
-        [call resolve:@{@"message": @"authorizerToken value was successfully set."}];
+        [call resolve:@{@"message": @"The AuthorizerToken value was successfully set."}];
     } else {
         [call reject:@"Invalid token parameter" :nil :nil :nil];
     }
@@ -248,7 +248,7 @@ static NSString * _pendingLaunchOptions;
 - (void)setShowNotificationsInForeground:(CAPPluginCall *)call {
     BOOL show = [call.options objectForKey:@"showNotifications"] ? [[call.options objectForKey:@"showNotifications"] boolValue] : YES;
     [CleverPush setShowNotificationsInForeground:show];
-    [call resolve:@{@"message": @"authorizerToken value was successfully set."}];
+    [call resolve:@{@"message": @"The setShowNotificationsInForeground value was successfully set."}];
 }
 
 - (NSDictionary*)getNotificationDictionary:(NSDictionary*)notificationDictionary {

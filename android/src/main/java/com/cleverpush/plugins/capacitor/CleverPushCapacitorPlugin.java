@@ -174,7 +174,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
         String url = call.getString("url");
         if (url != null && !url.isEmpty()) {
             CleverPush.trackPageView(url);
-            call.resolve();
+            call.resolve(new JSObject().put("message", "The trackpageview value was successfully set."));
         } else {
             call.reject("Invalid URL parameter");
         }
@@ -200,7 +200,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
             } else {
                 CleverPush.getInstance(this.getActivity()).trackEvent(eventName);
             }
-            call.resolve();
+            call.resolve(new JSObject().put("message", "The trackevent value was successfully set."));
          } else {
             call.reject("Invalid eventName parameter");
          }
@@ -211,7 +211,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
         String value = call.getString("tagId");
         if (value != null && !value.isEmpty()) {
             CleverPush.getInstance(this.getActivity()).addSubscriptionTag(value);
-            call.resolve();
+            call.resolve(new JSObject().put("message", "The addSubscription tag value was successfully added."));
         } else {
             call.reject("Invalid tagId parameter");
         }
@@ -222,7 +222,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
         String value = call.getString("tagId");
         if (value != null && !value.isEmpty()) {
             CleverPush.getInstance(this.getActivity()).removeSubscriptionTag(value);
-            call.resolve();
+            call.resolve(new JSObject().put("message", "The removeSubscription tag value was successfully removed. set."));
         } else {
             call.reject("Invalid tagId parameter");
         }
@@ -247,7 +247,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
                 value[i] = topicsArray.getString(i);
             }
             CleverPush.getInstance(this.getActivity()).setSubscriptionTopics(value);
-            call.resolve();
+            call.resolve(new JSObject().put("message", "The setSubscriptionTopics value was successfully set."));
         } else {
             call.reject("Invalid topics parameter");
         }
@@ -314,13 +314,13 @@ public class CleverPushCapacitorPlugin extends Plugin {
     @PluginMethod
     public void showTopicsDialog(PluginCall call) {
         CleverPush.getInstance(this.getActivity()).showTopicsDialog();
-        call.success(new JSObject().put("message", "showTopicsDialog function was successfully executed."));
+        call.resolve(new JSObject().put("message", "The showTopicsDialog The showTopicsDialog function was successfully executed."));
     }
 
     @PluginMethod
     public void enableDevelopmentMode(PluginCall call) {
         CleverPush.getInstance(this.getActivity()).enableDevelopmentMode();
-        call.success(new JSObject().put("message", "Cleverpush SDK development mode is enabled."));
+        call.resolve(new JSObject().put("message", "Cleverpush SDK development mode is enabled."));
     }
 
     @PluginMethod
@@ -328,7 +328,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
         String token = call.getString("token");
          if (token != null && !token.isEmpty()) {
             CleverPush.getInstance(this.getActivity()).setAuthorizerToken(token);
-            call.resolve();
+            call.resolve(new JSObject().put("message", "The AuthorizerToken value was successfully set."));
         } else {
             call.reject("Invalid token parameter");
         }
@@ -368,7 +368,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
         String value = call.getString("value");
         if (attributeId != null && value != null) {
             CleverPush.getInstance(this.getActivity()).setSubscriptionAttribute(attributeId, value);
-            call.resolve();
+            call.resolve(new JSObject().put("message", "The setSubscriptionAttribute value was set successfully."));
         } else {
             call.reject("Invalid attributeId or value parameter");
         }
@@ -395,6 +395,6 @@ public class CleverPushCapacitorPlugin extends Plugin {
     public void setShowNotificationsInForeground(PluginCall call) {
         boolean value = call.getBoolean("showNotifications");
         showNotificationsInForeground = value;
-        call.resolve();
+        call.resolve(new JSObject().put("message", "The setShowNotificationsInForeground value was successfully set."));
     }
 }
