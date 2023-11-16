@@ -1,3 +1,7 @@
+## 1.3.9
+* Optimized resolving of promises in various SDK methods
+* Updated native iOS + Android SDKs
+
 ## 1.3.8
 * Optimized `setAuthorizerToken` method
 
