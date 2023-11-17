@@ -1,3 +1,6 @@
+## 1.3.10
+* Fixed return values in TS definition
+
 ## 1.3.9
 * Optimized resolving of promises in various SDK methods
 * Updated native iOS + Android SDKs
