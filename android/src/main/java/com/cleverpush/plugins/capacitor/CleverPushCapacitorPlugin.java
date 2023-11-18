@@ -7,9 +7,8 @@ import com.cleverpush.CleverPush;
 import com.cleverpush.CustomAttribute;
 import com.cleverpush.Notification;
 import com.cleverpush.NotificationOpenedResult;
-import com.cleverpush.listener.NotificationReceivedCallbackListener;
 import com.cleverpush.listener.NotificationOpenedListener;
-import com.cleverpush.listener.NotificationReceivedListener;
+import com.cleverpush.listener.NotificationReceivedCallbackListener;
 import com.cleverpush.listener.SubscribedCallbackListener;
 import com.cleverpush.listener.SubscribedListener;
 import com.getcapacitor.JSArray;
@@ -28,8 +27,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import org.json.JSONException;
 import java.util.TimeZone;
+import org.json.JSONException;
 
 @CapacitorPlugin(name = "CleverPush")
 public class CleverPushCapacitorPlugin extends Plugin {
@@ -173,7 +172,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
     public void trackPageView(PluginCall call) {
         String value = call.getString("url");
         if (value != null && !value.isEmpty()) {
-            CleverPush.trackPageView(value);
+            CleverPush.getInstance(this.getActivity()).trackPageView(value);
             call.resolve(new JSObject().put("success", true));
         } else {
             call.reject("Invalid URL parameter");

@@ -1,3 +1,6 @@
+## 1.3.11
+* Fixed build issue on Android
+
 ## 1.3.10
 * Fixed return values in TS definition
 
