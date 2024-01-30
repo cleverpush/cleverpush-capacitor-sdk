@@ -216,7 +216,7 @@ static NSString * _pendingLaunchOptions;
                 [call resolve:@{@"subscriptionId": subscriptionId}];
             }
         } failure:^(NSError *error) {
-            if (self.pluginCallDelegate != nil && call.callbackId != nil) {
+            if (self.pluginCallDelegate != nil || call.callbackId != nil) {
                 [call reject:error.localizedDescription ?: @"" :nil :nil :nil];
             }
         }];
