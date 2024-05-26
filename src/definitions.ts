@@ -13,7 +13,7 @@ export interface CleverPushCapacitorPlugin {
   trackEvent(options: { eventName: string, properties?: Record<string, unknown> }): Promise<{ success: boolean }>;
   addSubscriptionTag(options: { tagId: string }): Promise<{ success: boolean }>;
   removeSubscriptionTag(options: { tagId: string }): Promise<{ success: boolean }>;
-  hasSubscriptionTag(options: { tagId: string}): Promise<{ hasTag: boolean }>;
+  hasSubscriptionTag(options: { tagId: string }): Promise<{ hasTag: boolean }>;
   getSubscriptionTags(): Promise<{ tagIds: string[] }>;
   getSubscriptionTopics(): Promise<{ topicIds: string[] }>;
   setSubscriptionTopics(options: { topics: string[] }): Promise<{ success: boolean }>;
@@ -21,7 +21,7 @@ export interface CleverPushCapacitorPlugin {
   setAuthorizerToken(options: { token: string }): Promise<{ success: boolean }>;
   getNotifications(): Promise<{ notifications: any[] }>;
   setSubscriptionAttribute(options: { attributeId: string; value: string }): Promise<{ success: boolean }>;
-  getSubscriptionAttribute(options: { attributeId: string}): Promise<{ value: string }>;
+  getSubscriptionAttribute(options: { attributeId: string }): Promise<{ value: string }>;
   getSubscriptionAttributes(): Promise<{ attributes: { attributeId: string; value: string; }[] }>;
   getAvailableAttributes(): Promise<{ attributes: { attributeId: string; value: string; }[] }>;
   setShowNotificationsInForeground(options: { showNotifications: boolean }): Promise<{ success: boolean }>;
@@ -29,18 +29,18 @@ export interface CleverPushCapacitorPlugin {
   addListener(
     eventName: 'notificationReceived',
     listenerFunc: (data: { notification?: any }) => void,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
   addListener(
     eventName: 'notificationOpened',
     listenerFunc: (data: { notification?: any }) => void,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
   addListener(
     eventName: 'appBannerOpened',
     listenerFunc: (data: any) => void,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
   addListener(
     eventName: 'subscribed',
     listenerFunc: (data: { subscriptionId: string }) => void,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
 }
 
