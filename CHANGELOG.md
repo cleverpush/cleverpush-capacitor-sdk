@@ -1,3 +1,7 @@
+## 1.3.14 (27.05.2024)
+* Migrate plugin to capacitor v6
+* Updated native iOS + Android SDKs
+
 ## 1.3.13 (01.05.2024)
 * Updated native iOS + Android SDKs
 
