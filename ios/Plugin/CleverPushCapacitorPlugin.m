@@ -273,15 +273,18 @@ static NSString * _pendingLaunchOptions;
 - (void)init:(CAPPluginCall *)call {
     dispatch_async(dispatch_get_main_queue(), ^{
         id<CAPBridgeProtocol> bridge = self.bridge;
-        if (bridge && ![bridge pluginWithName:self.jsName]) {
+        NSString *jsName = self.jsName;
+
+        if (bridge && jsName && ![bridge pluginWithName:jsName]) {
             [bridge registerPluginInstance:[[CleverPushCapacitorPlugin alloc] init]];
         }
     });
 
     self.pluginCallDelegate = call;
-    
+
     NSString *channelId = [call.options objectForKey:@"channelId"] ?: @"";
     BOOL autoRegister = [call.options objectForKey:@"autoRegister"] != nil ? [[call.options objectForKey:@"autoRegister"] boolValue] : YES;
+
     [self initCleverPushObjectWithLaunchOptions:CleverPushCapacitorPlugin.pendingLaunchOptions channelId:channelId autoRegister:autoRegister];
 }
 
