@@ -65,6 +65,18 @@ public class CleverPushCapacitorPlugin extends Plugin {
     @PluginMethod
     public void init(PluginCall call) {
 
+        try {
+            Bridge bridge = this.bridge;
+            if (bridge != null) {
+                PluginHandle pluginHandle = bridge.getPlugin("CleverPush");
+                if (pluginHandle == null) {
+                    bridge.registerPlugin(CleverPushCapacitorPlugin.class);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+
         NotificationReceivedCallbackListener receivedListener = new NotificationReceivedCallbackListener() {
             @Override
             public boolean notificationReceivedCallback(NotificationOpenedResult result) {
