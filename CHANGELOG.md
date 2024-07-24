@@ -1,3 +1,7 @@
+## 1.3.16 (24.07.2024)
+* Updated native iOS + Android SDKs
+* If the CleverPush plugin is not registered, the `init` method will automatically register it.
+
 ## 1.3.15 (29.05.2024)
 * Updated native iOS + Android SDKs
 
