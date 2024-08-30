@@ -1,3 +1,8 @@
+## 1.3.17 (30.08.2024)
+* Resolved issue of CleverPush plugin is not implemented on ios updating capacitor from 5 to 6
+* Add missing import to CleverPushCapacitorPlugin.java
+* Updated native iOS + Android SDKs
+
 ## 1.3.16 (24.07.2024)
 * Updated native iOS + Android SDKs
 * If the CleverPush plugin is not registered, the `init` method will automatically register it.
