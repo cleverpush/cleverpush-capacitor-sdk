@@ -178,7 +178,19 @@ static NSString * _pendingLaunchOptions;
 
 - (void)getAvailableTopics:(CAPPluginCall *)call {
     [CleverPush getAvailableTopics:^(NSArray<CPChannelTopic *> *topicsArray) {
-        [call resolve:@{@"topics": topicsArray}];
+        NSMutableArray *topicsJsonArray = [NSMutableArray array];
+
+        for (CPChannelTopic *topic in topicsArray) {
+            if (topic.id && topic.name) {
+                NSDictionary *topicDict = @{
+                        @"id": topic.id,
+                        @"name": topic.name
+                };
+                [topicsJsonArray addObject:topicDict];
+            }
+        }
+
+        [call resolve:@{@"topics": topicsJsonArray}];
     }];
 }
 

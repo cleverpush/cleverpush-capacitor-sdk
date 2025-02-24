@@ -2,6 +2,7 @@ package com.cleverpush.plugins.capacitor;
 
 import android.os.Build;
 import android.util.Log;
+
 import com.cleverpush.ChannelTopic;
 import com.cleverpush.CleverPush;
 import com.cleverpush.CustomAttribute;
@@ -20,6 +21,7 @@ import com.getcapacitor.PluginHandle;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.google.gson.Gson;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +32,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
+
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 @CapacitorPlugin(name = "CleverPush")
 public class CleverPushCapacitorPlugin extends Plugin {
@@ -277,17 +282,31 @@ public class CleverPushCapacitorPlugin extends Plugin {
     @PluginMethod
     public void getSubscriptionTopics(PluginCall call) {
         Set<String> subscriptionTopics = CleverPush.getInstance(this.getActivity()).getSubscriptionTopics();
+        JSONArray jsonArray = new JSONArray(subscriptionTopics);
         JSObject obj = new JSObject();
-        obj.put("topicIds", subscriptionTopics);
+        obj.put("topicIds", jsonArray);
         call.resolve(obj);
     }
 
     @PluginMethod
     public void getAvailableTopics(PluginCall call) {
         CleverPush.getInstance(this.getActivity()).getAvailableTopics(topics -> {
-            Set<ChannelTopic> channelTopic = topics;
+            JSONArray topicsArray = new JSONArray();
+
+            for (ChannelTopic topic : topics) {
+                JSONObject topicObject = new JSONObject();
+                try {
+                    topicObject.put("id", topic.getId());
+                    topicObject.put("name", topic.getName());
+                    topicsArray.put(topicObject);
+                } catch (JSONException e) {
+                    call.reject("Failed to create topic JSON", e);
+                    return;
+                }
+            }
+
             JSObject obj = new JSObject();
-            obj.put("topics", channelTopic);
+            obj.put("topics", topicsArray);
             call.resolve(obj);
         });
     }
