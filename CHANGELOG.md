@@ -1,6 +1,10 @@
+## 1.3.19 (24.02.2025)
+* Updated native iOS + Android SDKs
+* Resolved an issue in `getSubscriptionTopics` and `getAvailableTopics` where topics were not received correctly.
+
 ## 1.3.18 (19.09.2024)
 * Updated native iOS + Android SDKs
-* 
+
 ## 1.3.17 (30.08.2024)
 * Resolved issue of CleverPush plugin is not implemented on ios updating capacitor from 5 to 6
 * Add missing import to CleverPushCapacitorPlugin.java
