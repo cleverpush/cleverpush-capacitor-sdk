@@ -3,6 +3,10 @@ package com.cleverpush.plugins.capacitor;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+
 import com.cleverpush.ChannelTopic;
 import com.cleverpush.CleverPush;
 import com.cleverpush.CustomAttribute;
@@ -38,9 +42,34 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 @CapacitorPlugin(name = "CleverPush")
-public class CleverPushCapacitorPlugin extends Plugin {
+public class CleverPushCapacitorPlugin extends Plugin implements LifecycleObserver {
     private JSObject coldStartOpenObject = null;
     private boolean showNotificationsInForeground = true;
+    private boolean isAppInForeground = false;
+
+    public boolean isAppOpen() {
+        return isAppInForeground;
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    public void onStart() {
+        isAppInForeground = true;
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onStop() {
+        isAppInForeground = false;
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    public void onDestroy() {
+        isAppInForeground = false;
+    }
+
+    @Override
+    public void load() {
+        this.getActivity().getLifecycle().addObserver(this);
+    }
 
     private JSObject getNotificationJSObject(JSObject notification) {
         String createdAtString = notification.getString("createdAt");
@@ -87,7 +116,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
         NotificationReceivedCallbackListener receivedListener = new NotificationReceivedCallbackListener() {
             @Override
             public boolean notificationReceivedCallback(NotificationOpenedResult result) {
-                boolean appIsOpen = CleverPush.getInstance(bridge.getActivity()).isAppOpen();
+                boolean appIsOpen = isAppOpen();
                
                 if (appIsOpen) {
                     try {
@@ -136,7 +165,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
                     obj.put("subscriptionId", subscriptionId);
                     notifyListeners("subscribed", obj);
                 },
-            Boolean.TRUE.equals(call.getBoolean("autoRegister", true))
+                Boolean.TRUE.equals(call.getBoolean("autoRegister", true))
         );
 
         CleverPush.getInstance(this.getActivity()).setAppBannerOpenedListener(action -> {
@@ -358,7 +387,7 @@ public class CleverPushCapacitorPlugin extends Plugin {
     @PluginMethod
     public void setAuthorizerToken(PluginCall call) {
         String token = call.getString("token");
-         if (token != null && !token.isEmpty()) {
+        if (token != null && !token.isEmpty()) {
             CleverPush.getInstance(this.getActivity()).setAuthorizerToken(token);
             call.resolve(new JSObject().put("success", true));
         } else {
