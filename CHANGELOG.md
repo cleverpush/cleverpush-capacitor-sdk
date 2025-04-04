@@ -1,3 +1,7 @@
+## 1.3.20 (04.04.2025)
+* Updated native iOS + Android SDKs
+* Resolved an issue where `notificationReceived` was not working when reopening the app from a killed or background state.
+
 ## 1.3.19 (24.02.2025)
 * Updated native iOS + Android SDKs
 * Resolved an issue in `getSubscriptionTopics` and `getAvailableTopics` where topics were not received correctly.
