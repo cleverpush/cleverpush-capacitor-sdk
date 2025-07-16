@@ -1,3 +1,7 @@
+## 1.4.0 (16.07.2025)
+* Updated to Capacitor 7.4.2 (from 6.0.0)
+* Updated native iOS + Android SDKs
+
 ## 1.3.20 (04.04.2025)
 * Updated native iOS + Android SDKs
 * Resolved an issue where `notificationReceived` was not working when reopening the app from a killed or background state.
