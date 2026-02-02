@@ -17,13 +17,11 @@ jobs:
       # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v4
         with:
-          node-version: '17'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci --legacy-peer-deps
       - run: npm run build
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --access public
       - name: Generate Changelog
         run: |
           sed -n "/$GITHUB_REF_NAME/,/^$/{/^$/q;p;}" CHANGELOG.md > ${{ github.workspace }}-CHANGELOG.txt
