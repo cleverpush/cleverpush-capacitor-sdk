@@ -1,3 +1,6 @@
+## 1.4.1 (11.06.2026)
+* Updated native iOS + Android SDKs
+
 ## 1.4.0 (16.07.2025)
 * Updated to Capacitor 7.4.2 (from 6.0.0)
 * Updated native iOS + Android SDKs
