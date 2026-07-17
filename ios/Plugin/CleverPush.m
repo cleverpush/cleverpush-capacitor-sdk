@@ -83,7 +83,7 @@ static NSString * _pendingLaunchOptions;
                     [obj setObject:result.action forKey:@"action"];
                 }
 
-                [self notifyListeners:@"notificationOpened" data:obj];
+                [self notifyListeners:@"notificationOpened" data:obj retainUntilConsumed:YES];
             }
         } handleSubscribed:^(NSString *subscriptionId) {
             UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
