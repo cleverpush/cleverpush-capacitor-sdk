@@ -1,7 +1,7 @@
 PODS:
-  - Capacitor (7.4.2):
+  - Capacitor (8.4.1):
     - CapacitorCordova
-  - CapacitorCordova (7.4.2)
+  - CapacitorCordova (8.4.1)
   - CleverPush (1.28.8)
 
 DEPENDENCIES:
