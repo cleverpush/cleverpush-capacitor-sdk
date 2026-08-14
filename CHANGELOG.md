@@ -1,4 +1,7 @@
-## 1.4.1 (11.06.2026)
+## 1.5.1 (14.08.2026)
+* Updated native iOS + Android SDKs
+
+## 1.5.0 (17.07.2026)
 * Updated native iOS + Android SDKs
 * Fixed the issue of retaining the notificationOpened event until the JS listener registers to prevent dropped deep links on cold start in iOS.
 * Added support for Capacitor 8.
