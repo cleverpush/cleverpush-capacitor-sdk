@@ -21,7 +21,7 @@ let package = Package(
                 .product(name: "Cordova", package: "capacitor-swift-pm"),
                 .product(name: "CleverPush", package: "cleverpush-ios-sdk-spm")
             ],
-            path: "ios/Sources/CleverpushCapacitorSdk",
+            path: "ios/Plugin",
             publicHeadersPath: ".",
             cSettings: [
                 .headerSearchPath(".")
