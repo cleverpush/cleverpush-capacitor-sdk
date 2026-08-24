@@ -22,6 +22,7 @@ let package = Package(
                 .product(name: "CleverPush", package: "cleverpush-ios-sdk-spm")
             ],
             path: "ios/Plugin",
+            exclude: ["Info.plist"],
             publicHeadersPath: ".",
             cSettings: [
                 .headerSearchPath(".")
