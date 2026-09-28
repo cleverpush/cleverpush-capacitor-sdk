@@ -11,7 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", from: "8.0.0"),
-        .package(url: "https://github.com/cleverpush/cleverpush-ios-sdk-spm.git", from: "1.34.52")
+        .package(url: "https://github.com/cleverpush/cleverpush-ios-sdk-spm.git", from: "1.34.54")
     ],
     targets: [
         .target(
