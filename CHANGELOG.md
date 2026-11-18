@@ -1,3 +1,6 @@
+## 1.5.3 (18.11.2026)
+* Updated native iOS + Android SDKs
+
 ## 1.5.2 (28.09.2026)
 * Updated native iOS + Android SDKs
 
